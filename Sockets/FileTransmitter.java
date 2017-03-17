@@ -8,18 +8,32 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.net.SocketTimeoutException;
 
-public class FileTransmitter extends Thread{
+public class FileTransmitter extends Thread
+{
+    public boolean m_bStopFL = false;
     public FileTransmitter(){}
-    public void run() {
-        try {
+    public void run() 
+    {
+        try 
+        {
             ServerSocket serverSocket = new ServerSocket(Globals.m_iPortFileTransmiter);
-            while(true)
+            serverSocket.setSoTimeout(1000);
+            while(!m_bStopFL)
             {
-                Socket clientConnection = serverSocket.accept();
-                new FileTransmitterDispatcher(clientConnection).start();
+                try
+                {
+                    Socket clientConnection = serverSocket.accept();
+                    new FileTransmitterDispatcher(clientConnection).start();
+                }
+                catch(SocketTimeoutException s){}
             }
-        } catch (Exception e) {
+
+            Globals.PrintMessage("[FileTransmitter Interrupted]", Globals.m_bDebugFT );
+        } 
+        catch (Exception e) 
+        {
             e.printStackTrace();
         }
     }
@@ -32,10 +46,12 @@ class FileTransmitterDispatcher extends Thread
     {   
         this.socket = clientConnection;
     }
-    public void run(){
+    
+    public void run()
+    {
         try
         {
-            System.out.println("[FileTransmitter]: Received a resource request from: "+socket.getInetAddress().toString());
+            Globals.PrintMessage("[FileTransmitter]: Received a resource request from: "+socket.getInetAddress().toString(), Globals.m_bDebugFT );
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
             Message inputMsg = (Message)inputStream.readObject();
             String file = inputMsg.GetFileName();
@@ -48,11 +64,15 @@ class FileTransmitterDispatcher extends Thread
                 dOut.writeObject(fileMsg);
             }
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (ClassNotFoundException e){}
+        catch (IOException e) 
+        {
+            Globals.PrintMessage("[FileTransmitterIOException]", Globals.m_bDebugFT );
         }
     }
-    private static byte[] readBytesFromFile(String filePath) {
+    
+    private static byte[] readBytesFromFile(String filePath) 
+    {
 
         FileInputStream fileInputStream = null;
         byte[] bytesArray = null;

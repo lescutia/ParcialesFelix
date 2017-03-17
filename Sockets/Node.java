@@ -12,7 +12,8 @@ import java.io.File;
 import java.net.SocketException;
 import java.util.*;
 import javax.swing.JOptionPane;
-public class Node
+import java.lang.Exception;
+public class Node extends Thread
 {
 	public Node(){}
 
@@ -74,7 +75,78 @@ public class Node
 		}
 	}
 
-	public void startNode() throws SocketException, UnknownHostException, IOException
+	public void run() 
+	{
+		try
+		{		
+			if(Globals.m_bIsClient)
+			{
+				Node node = new Node();
+				node.findLeader();
+				
+				if(Globals.m_strLeaderId == "")
+				{
+					if( Globals.m_bDebugNode )
+						System.out.println("[Node]: No leader found");
+					throw new LeaderNotFoundException();
+				}
+				else
+				{
+					ClientRunner cr = new ClientRunner(node);
+					cr.start();
+				}
+			}
+		}
+		catch(LeaderNotFoundException e)
+		{
+			System.out.println("[NodeLNFException]");
+		}
+	}
+}
+
+class ClientRunner extends Thread
+{
+	Node node;
+	public ClientRunner(Node node)
+	{
+		this.node = node;
+	}
+	public void run()
+	{
+		Runner();
+	}
+	public void Runner()
+	{
+		DynamicTreeDemo dtd = new DynamicTreeDemo();
+		dtd.startGUI();
+		FileTransmitter ft = new FileTransmitter();
+		ft.start();
+		ResourceUpdater ru = new ResourceUpdater(node);
+		try
+		{
+			ru.start();
+			while(ru.isAlive()){}
+			if(!ru.isAlive())
+			{
+				//Globals.m_bCloseFT = true;
+				dtd.dispose();
+				ft.m_bStopFL = true;
+				//ft.interrupt();
+				throw new CriticalException();
+			}			
+		}
+		catch(CriticalException e)
+		{
+			System.out.println("[NodeCriticalException/ClientRunner]");
+		}
+		
+	}
+}
+
+class LeaderRunner extends Thread
+{
+	public LeaderRunner(){}
+	public void run()
 	{
 		if(Globals.m_bIsLeader)
 		{
@@ -83,27 +155,23 @@ public class Node
 			DataInfoManager updateListener = new DataInfoManager();
 			updateListener.start();	
 		}
-		
-		if(Globals.m_bIsClient)
-		{
-			Node node = new Node();
-			node.findLeader();
-			
-			if(Globals.m_strLeaderId == "")
-			{
-				if( Globals.m_bDebugNode )
-					System.out.println("[Node]: No leader found");
-					JOptionPane.showMessageDialog(null, "No leader found");
-			}
-			else
-			{
-				DynamicTreeDemo dtd = new DynamicTreeDemo();
-				dtd.startGUI();
-				FileTransmitter ft = new FileTransmitter();
-				ft.start();
-				ResourceUpdater ru = new ResourceUpdater(node);
-				ru.start();
-			}
-		}
 	}
+}
+
+class LeaderNotFoundException extends Exception
+{
+	public LeaderNotFoundException() {}
+	public LeaderNotFoundException(String message)
+	{
+        super(message);
+    }
+}
+
+class CriticalException extends Exception
+{
+	public CriticalException() {}
+	public CriticalException(String message)
+	{
+        super(message);
+    }
 }

@@ -28,11 +28,10 @@ public class ResourceUpdater extends Thread{
 
 	private boolean updaterLoop()
 	{
-		try{
+		try
+		{
 			Socket socket = new Socket(Globals.m_strLeaderId, Globals.m_iPortResourceUpdater);
-			System.out.println("[ResourceUpdater]: Preparing update table");
 			msg = new Message(Message.EMessageType.UPDATE, 0, node.getResources());
-			System.out.println("[ResourceUpdater]: Update prepared");
 			ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 			outputStream.writeObject(msg);
 			outputStream.flush();		

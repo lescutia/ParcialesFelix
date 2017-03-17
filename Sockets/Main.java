@@ -3,7 +3,6 @@ import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
 
-
 public class Main extends JPanel implements ActionListener 
 {
 	JButton m_SharedFolder;
@@ -62,20 +61,29 @@ public class Main extends JPanel implements ActionListener
 		{
 			if( Globals.m_strSharedDirPath != "" && Globals.m_strDownloadPath != "" || Globals.m_bIsLeader)
 			{
-				try
-				{
-					Node newNode = new Node();
-					newNode.startNode();
-					m_Frame.dispose();
-				}
-				catch( Exception ex )
-				{
-
-				}
+				m_Frame.dispose();
+				Runner();
 			}
 		}
 	}
-   
+	public void Runner()
+	{
+		Node newNode = new Node();
+		newNode.start();
+		try
+		{
+			newNode.join();
+		}
+		catch(InterruptedException e)
+		{
+			
+		}
+		execLeaderSelection();
+	}
+	public void execLeaderSelection()
+	{
+		System.out.println("[MainexectLeaderSelection]");
+	}
   	public Dimension getPreferredSize()
   	{
     	return new Dimension(500, 75);

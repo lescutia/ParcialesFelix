@@ -13,6 +13,8 @@ public class Globals
 	public static boolean m_bDebugTree 		= false;
    /*< Flag to active or disable debug mode in class Main. */
 	public static boolean m_bDebugMain	 	= true;
+	/*< Flag to active or disable debug mode in class FileTransmitter */
+	public static boolean m_bDebugFT		= true;
 
 	/********************************************************
 						Port Variables
@@ -51,6 +53,6 @@ public class Globals
    /********************************************************
                   State Variable
    ********************************************************/
-   public static boolean m_bIsLeader = true;
-   public static boolean m_bIsClient = false;
+   public static boolean m_bIsLeader = false;
+   public static boolean m_bIsClient = true;
 }
