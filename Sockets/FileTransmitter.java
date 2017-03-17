@@ -13,9 +13,10 @@ import java.net.SocketTimeoutException;
 public class FileTransmitter extends Thread
 {
     public boolean m_bStopFL = false;
-    public FileTransmitter(){}
+    public FileTransmitter(){ this.setName("FileTransmitter-Thread"); }
     public void run() 
     {
+        Globals.PrintMessage("=======[FileTransmitter Begin]=======", Globals.m_bDebugFT );
         try 
         {
             ServerSocket serverSocket = new ServerSocket(Globals.m_iPortFileTransmiter);
@@ -36,6 +37,7 @@ public class FileTransmitter extends Thread
         {
             e.printStackTrace();
         }
+        Globals.PrintMessage("=======[FileTransmitter Ends]=======", Globals.m_bDebugFT );
     }
 }
 
@@ -43,7 +45,8 @@ class FileTransmitterDispatcher extends Thread
 {
     private Socket socket;
     public FileTransmitterDispatcher(Socket clientConnection)
-    {   
+    {
+        this.setName("FileTransmitterDispatcher-Thread");
         this.socket = clientConnection;
     }
     

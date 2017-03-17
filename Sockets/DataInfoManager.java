@@ -7,7 +7,9 @@ import java.nio.file.NoSuchFileException;
 public class DataInfoManager extends Thread{
 	Timer timer;
 	List m_lstResources;
-	public DataInfoManager(){
+	public DataInfoManager()
+	{
+		this.setName("DataInfoManager-Thread");
 		timer = new Timer();
 	}
 	

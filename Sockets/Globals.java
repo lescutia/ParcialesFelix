@@ -8,13 +8,15 @@ public class Globals
    /*< Flag to active or disable debug mode in class DataInfoManager. */
 	public static boolean m_bDebugDIMng 	= true;
 	/*< Flag to active or disable debug mode in class LeaderListen. */
-	public static boolean m_bDebugLeader 	= true;
+	public static boolean m_bDebugLeader 	= false;
 	/*< Flag to active or disable debug mode in class DynamicTreeDemo. */
 	public static boolean m_bDebugTree 		= false;
    /*< Flag to active or disable debug mode in class Main. */
-	public static boolean m_bDebugMain	 	= true;
+	public static boolean m_bDebugMain	 	= false;
 	/*< Flag to active or disable debug mode in class FileTransmitter */
 	public static boolean m_bDebugFT		= true;
+	/*< Flag to active or disable debug mode in class CLient */
+	public static boolean m_bDebugClient	= true;
 
 	/********************************************************
 						Port Variables
@@ -31,6 +33,7 @@ public class Globals
 	public static int m_iPortLeaderListener 	= 10000;
    /*< Time in miliseconds to wait for leader reply. */
    public static int m_iTimeOutLeaderSearch 	= 2000;
+   
    /********************************************************
 						Network Variables
 	********************************************************/

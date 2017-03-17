@@ -9,7 +9,8 @@ public class ResourceUpdater extends Thread{
 	Message msg;
 	public ResourceUpdater(Node node)
 	{	
-		this.node = node;			
+		this.node = node;
+		this.setName("ResourceUpdater-Thread");
 	}
 
 	public void run()

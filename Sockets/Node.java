@@ -77,12 +77,13 @@ public class Node extends Thread
 
 	public void run() 
 	{
+		Globals.PrintMessage("=======[Node Begin]=======", Globals.m_bDebugNode );
 		try
 		{		
 			if(Globals.m_bIsClient)
 			{
-				Node node = new Node();
-				node.findLeader();
+				//Node node = new Node();
+				this.findLeader();
 				
 				if(Globals.m_strLeaderId == "")
 				{
@@ -92,8 +93,11 @@ public class Node extends Thread
 				}
 				else
 				{
-					ClientRunner cr = new ClientRunner(node);
+					ClientRunner cr = new ClientRunner(this);
 					cr.start();
+					//while(cr.isAlive()){ try{ Thread.sleep(100); }catch( InterruptedException e ){} }
+					//cr.join();
+					//throw new LeaderNotFoundException();
 				}
 			}
 		}
@@ -101,6 +105,8 @@ public class Node extends Thread
 		{
 			System.out.println("[NodeLNFException]");
 		}
+		//catch( InterruptedException e){}
+		Globals.PrintMessage("=======[Node Ends]=======", Globals.m_bDebugNode );
 	}
 }
 
@@ -109,6 +115,7 @@ class ClientRunner extends Thread
 	Node node;
 	public ClientRunner(Node node)
 	{
+		this.setName("Client-Thread");
 		this.node = node;
 	}
 	public void run()
@@ -117,35 +124,41 @@ class ClientRunner extends Thread
 	}
 	public void Runner()
 	{
+		Globals.PrintMessage("=======[Client Begin]=======", Globals.m_bDebugClient );
 		DynamicTreeDemo dtd = new DynamicTreeDemo();
+		//dtd.start();
 		dtd.startGUI();
 		FileTransmitter ft = new FileTransmitter();
 		ft.start();
-		ResourceUpdater ru = new ResourceUpdater(node);
-		try
+		while(true)
 		{
-			ru.start();
-			while(ru.isAlive()){}
-			if(!ru.isAlive())
+			try
 			{
-				//Globals.m_bCloseFT = true;
-				dtd.dispose();
-				ft.m_bStopFL = true;
-				//ft.interrupt();
+				ResourceUpdater ru = new ResourceUpdater(node);
+				ru.start();
+				while(ru.isAlive()){ try{ Thread.sleep(100); }catch( InterruptedException e ){} }
+				//dtd.dispose();
+				//ft.m_bStopFL = true;
 				throw new CriticalException();
-			}			
+			}
+			catch(CriticalException e)
+			{
+				Globals.PrintMessage("[NodeCriticalException/ClientRunner]", Globals.m_bDebugClient);
+				dtd.EnabledButtons( false );
+				//Find leader
+
+			}
 		}
-		catch(CriticalException e)
-		{
-			System.out.println("[NodeCriticalException/ClientRunner]");
-		}
-		
+		//Globals.PrintMessage("=======[Client Ends]=======", Globals.m_bDebugClient );
 	}
 }
 
 class LeaderRunner extends Thread
 {
-	public LeaderRunner(){}
+	public LeaderRunner()
+	{
+		this.setName("LeaderRunner-Thread");
+	}
 	public void run()
 	{
 		if(Globals.m_bIsLeader)

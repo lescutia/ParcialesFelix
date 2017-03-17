@@ -62,10 +62,14 @@ public class Main extends JPanel implements ActionListener
 			if( Globals.m_strSharedDirPath != "" && Globals.m_strDownloadPath != "" || Globals.m_bIsLeader)
 			{
 				m_Frame.dispose();
+				//DynamicTreeDemo dtd = new DynamicTreeDemo();
+				//dtd.startGUI();
 				Runner();
+				//dtd.dispose();
 			}
 		}
 	}
+
 	public void Runner()
 	{
 		Node newNode = new Node();
@@ -80,10 +84,12 @@ public class Main extends JPanel implements ActionListener
 		}
 		execLeaderSelection();
 	}
+
 	public void execLeaderSelection()
 	{
 		System.out.println("[MainexectLeaderSelection]");
 	}
+
   	public Dimension getPreferredSize()
   	{
     	return new Dimension(500, 75);
@@ -91,6 +97,7 @@ public class Main extends JPanel implements ActionListener
     
   	public static void main(String s[]) 
   	{
+  		Globals.PrintMessage("=======[Main Begin]=======", Globals.m_bDebugMain );
 		JFrame frame = new JFrame("DMS");
 		Main panel = new Main( frame );
 
@@ -108,5 +115,6 @@ public class Main extends JPanel implements ActionListener
 		frame.getContentPane().add(panel,"Center");
 		frame.setSize(panel.getPreferredSize());
 		frame.setVisible(true);
+		Globals.PrintMessage("=======[Main Ends]=======", Globals.m_bDebugMain );
 	}
 }

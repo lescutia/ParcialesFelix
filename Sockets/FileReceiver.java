@@ -18,6 +18,7 @@ public class FileReceiver extends Thread{
 		this.owner		= owner;
 		this.path		= path;
 		this.fileName	= fileName;
+		this.setName("FileReceiver-Thread");
 	}
 
 	public void run() 

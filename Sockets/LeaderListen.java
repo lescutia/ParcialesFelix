@@ -5,6 +5,7 @@ public class LeaderListen extends Thread {
 	int port;
 	public LeaderListen(int port)
 	{
+		this.setName("LeaderListen-Thread");
 		this.port = port;
 	}
 	

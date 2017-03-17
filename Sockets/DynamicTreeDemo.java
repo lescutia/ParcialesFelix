@@ -15,30 +15,62 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class DynamicTreeDemo extends JPanel implements ActionListener {
+/*
+public class DynamicTreeDemo extends Thread
+{
+  BaseDynamicTree m_DynamicTree;
+  public DynamicTreeDemo() { }
+
+  public void run()
+  {
+    m_DynamicTree = new BaseDynamicTree();
+    m_DynamicTree.createAndShowGUI();
+  }
+
+  public void finish()
+  {
+    m_DynamicTree.dispose();
+  }
+}
+*/
+
+class DynamicTreeDemo extends JPanel implements ActionListener 
+{
   private int newNodeSuffix = 1;
   private static String DOWNLOAD_COMMAND = "download";
   private static String REFRESH_COMMAND = "refresh";
   private static String CLEAR_COMMAND = "clear";
   JFrame frame;
   private DynamicTree treePanel;
+  
+  JButton addButton, 
+          removeButton,
+          clearButton;
 
-  public DynamicTreeDemo() {
+  public void EnabledButtons( boolean in_bEnable )
+  {
+    addButton.setEnabled( in_bEnable );
+    removeButton.setEnabled( in_bEnable );
+    clearButton.setEnabled( in_bEnable );
+  }
+
+  public DynamicTreeDemo() 
+  {
     super(new BorderLayout());
 
     // Create the components.
     treePanel = new DynamicTree();
     //populateTree(treePanel);
 
-    JButton addButton = new JButton("Download");
+    addButton = new JButton("Download");
     addButton.setActionCommand(DOWNLOAD_COMMAND);
     addButton.addActionListener(this);
 
-    JButton removeButton = new JButton("Refresh");
+    removeButton = new JButton("Refresh");
     removeButton.setActionCommand(REFRESH_COMMAND);
     removeButton.addActionListener(this);
 
-    JButton clearButton = new JButton("Clear");
+    clearButton = new JButton("Clear");
     clearButton.setActionCommand(CLEAR_COMMAND);
     clearButton.addActionListener(this);
 
@@ -72,15 +104,16 @@ public class DynamicTreeDemo extends JPanel implements ActionListener {
    * Create the GUI and show it. For thread safety, this method should be
    * invoked from the event-dispatching thread.
    */
-  public void createAndShowGUI() {
+  public void createAndShowGUI() 
+  {
     // Create and set up the window.
     this.frame = new JFrame("Distributed File System");
     this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     // Create and set up the content pane.
-    DynamicTreeDemo newContentPane = new DynamicTreeDemo();
-    newContentPane.setOpaque(true); // content panes must be opaque
-    this.frame.setContentPane(newContentPane);
+    //DynamicTreeDemo newContentPane = new DynamicTreeDemo();
+    this.setOpaque(true); // content panes must be opaque
+    this.frame.setContentPane(this);
 
     // Display the window.
     this.frame.pack();
@@ -95,15 +128,18 @@ public class DynamicTreeDemo extends JPanel implements ActionListener {
   public void startGUI() {
     // Schedule a job for the event-dispatching thread:
     // creating and showing this application's GUI.
-    javax.swing.SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
+    javax.swing.SwingUtilities.invokeLater(new Runnable() 
+    {
+      public void run() 
+      {
         createAndShowGUI();
       }
     });
   }
 }
 
-class DynamicTree extends JPanel {
+class DynamicTree extends JPanel 
+{
   protected DefaultMutableTreeNode rootNode;
   protected DefaultTreeModel treeModel;
   protected JTree tree;
