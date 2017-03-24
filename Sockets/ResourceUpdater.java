@@ -31,6 +31,8 @@ public class ResourceUpdater extends Thread{
 	{
 		try
 		{
+			if(Globals.m_strLeaderId.equals(""))
+				throw new SocketException();
 			Socket socket = new Socket(Globals.m_strLeaderId, Globals.m_iPortResourceUpdater);
 			msg = new Message(Message.EMessageType.UPDATE, 0, node.getResources());
 			ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());

@@ -78,32 +78,16 @@ public class Node extends Thread
 	public void run() 
 	{
 		Globals.PrintMessage("=======[Node Begin]=======", Globals.m_bDebugNode );
-		try
-		{		
-			if(Globals.m_bIsClient)
-			{
-				//Node node = new Node();
-				this.findLeader();
-				
-				if(Globals.m_strLeaderId == "")
-				{
-					if( Globals.m_bDebugNode )
-						System.out.println("[Node]: No leader found");
-					throw new LeaderNotFoundException();
-				}
-				else
-				{
-					ClientRunner cr = new ClientRunner(this);
-					cr.start();
-					//while(cr.isAlive()){ try{ Thread.sleep(100); }catch( InterruptedException e ){} }
-					//cr.join();
-					//throw new LeaderNotFoundException();
-				}
-			}
-		}
-		catch(LeaderNotFoundException e)
+		if(Globals.m_bIsClient)
 		{
-			System.out.println("[NodeLNFException]");
+			//Node node = new Node();
+			this.findLeader();
+			
+			ClientRunner cr = new ClientRunner(this);
+			cr.start();
+			//while(cr.isAlive()){ try{ Thread.sleep(100); }catch( InterruptedException e ){} }
+			//cr.join();
+			//throw new LeaderNotFoundException();
 		}
 		//catch( InterruptedException e){}
 		Globals.PrintMessage("=======[Node Ends]=======", Globals.m_bDebugNode );
