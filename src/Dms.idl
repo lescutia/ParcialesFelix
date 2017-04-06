@@ -1,0 +1,14 @@
+module dms{
+
+    typedef sequence<octet> Data;
+    typedef sequence<string> fileList;
+
+    interface RemoteClient {
+        void WriteFile( in string fileName , in Data data , in long length);
+    };
+
+    interface RemoteServer {
+        void GetFile( in string fileName , in RemoteClient rCRef ); 
+    };  
+        
+};
