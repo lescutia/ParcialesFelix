@@ -6,6 +6,8 @@
 package Node;
 import dms.*;
 import org.omg.CORBA.*;
+import java.io.File;
+import java.io.FileInputStream;
 /**
  *
  * @author gamaa_000
@@ -18,9 +20,29 @@ public class RSObj extends RemoteServerPOA{
       orb = orb_val; 
     }
     
-    public void GetFile(String fileName, dms.RemoteClient rCRef){
-        System.out.println("Execution in the server");
-        RemoteClient rc = RemoteClientHelper.narrow(rCRef);
+    @Override
+    public void GetFile(String fileName, RemoteClient rCRef){
+        new Thread (new Runnable() {
+	    
+            @Override
+            public void run(){
+                try{
+		    
+		    System.out.println("[RSObj]: Sending "+fileName);
+                    File file = new File(Globals.m_strSharedDirPath+fileName);			 
+                    FileInputStream fis = new FileInputStream(file);	
+                    byte [] data = new byte[1024*1024];						
+                    int fileLength = fis.read(data);
+		    
+		    while( fileLength>0 ){
+			rCRef.WriteFile(fileName, data, fileLength);
+			fileLength = fis.read(data);
+		    }
+		    
+                }
+                catch(Exception e){}
+            }
+        }).start();
         
     }
 }
