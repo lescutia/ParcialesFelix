@@ -30,8 +30,8 @@ public class RCObj extends RemoteClientPOA
 	    fos.write(data, 0, length);
 	    fos.flush();
 	    fos.close();
-	    double progress = (actualFileLength/fileLength)*100;
-	    System.out.println("[RCObj]: Writing data "+"("+progress+")");
+	    double progress = (actualFileLength/fileLength)*100-100;
+	    System.out.println("[RCObj]: Writing data "+"("+Math.round(progress)+")");
 
 	    if ( data.length > length )
 	    {
