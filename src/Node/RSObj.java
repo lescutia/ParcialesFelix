@@ -19,6 +19,8 @@ public class RSObj extends RemoteServerPOA{
     }
     
     public void GetFile(String fileName, dms.RemoteClient rCRef){
+        System.out.println("Execution in the server");
+        RemoteClient rc = RemoteClientHelper.narrow(rCRef);
         
     }
 }

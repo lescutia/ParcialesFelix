@@ -20,22 +20,28 @@ import java.util.Properties;
 public class Node {
     public static void main(String args[]){
         
-        Server service = new Server();
+        Server service = new Server("Gamaliel",args);
         service.start();
         
     }
 }
 
-class Server extends Thread {
-    
-    String []args;
-    void Server(String args[]){
+class Server extends java.lang.Thread {
+    String serviceName;
+    String args[];
+    public Server(String name, String []args){
+        serviceName = name;
         this.args = args;
     }
-    void Run(){
+    @Override
+    public void run(){
         try{
             
-            ORB orb = ORB.init(args, null);
+            Properties props = new Properties();
+            props.put("org.omg.CORBA.ORBInitialPort", "1050");
+            props.put("org.omg.CORBA.ORBInitialHost", "localhost");
+            ORB orb = ORB.init(new String [1], props);       
+            
             POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
             rootpoa.the_POAManager().activate();
             
@@ -48,17 +54,17 @@ class Server extends Thread {
             org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
             NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
             
-            NameComponent path[] = ncRef.to_name("Compu de villela");
+            NameComponent path[] = ncRef.to_name(serviceName);
             ncRef.rebind(path, href);
             
-            System.out.println("[Node]: Listener ready");
+            System.out.println("[Servant]: Listener ready");
             
             while(true)
                 orb.run();
             
         }
         catch(Exception e){
-            System.out.println("[Node]: Exception");
+            System.out.println("[Servant]: Exception");
             e.getStackTrace();
         }
     }
@@ -75,10 +81,26 @@ class Client extends Thread{
     void Run(){
         
         try{
-        ORB orb = ORB.init(args,null);
-        org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
-        NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
-        
+            
+            Properties props = new Properties();
+            props.put("org.omg.CORBA.ORBInitialPort", "1050");
+            props.put("org.omg.CORBA.ORBInitialHost", "localhost");
+            
+            ORB orb = ORB.init(new String [1],props);
+            org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
+            NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+            RemoteServer rsobj = (RemoteServer) RemoteServerHelper.narrow(ncRef.resolve_str("Gamaliel"));
+            
+            System.out.println("[Client]: Requesting service");
+            
+            POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+            rootpoa.the_POAManager().activate();
+            RCObj rcobj = new RCObj();
+            org.omg.CORBA.Object ref = rootpoa.servant_to_reference(rcobj);
+            RemoteClient rcref = RemoteClientHelper.narrow(ref);
+            
+            rsobj.GetFile("ExampleFILE", rcref);
+            
         }
         catch(Exception e){
             System.out.println("[Client]: Exception");
