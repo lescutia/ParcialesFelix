@@ -20,7 +20,7 @@ import java.util.Properties;
 public class Node {
     public static void main(String args[]){
         
-        Server service = new Server("Gamaliel",args);
+        Server service = new Server("Gamaliel");
         service.start();
         
     }
@@ -28,19 +28,17 @@ public class Node {
 
 class Server extends java.lang.Thread {
     String serviceName;
-    String args[];
-    public Server(String name, String []args){
+    public Server(String name){
         serviceName = name;
-        this.args = args;
     }
     @Override
     public void run(){
         try{
-            
+            String args[] = null;
             Properties props = new Properties();
             props.put("org.omg.CORBA.ORBInitialPort", "1050");
-            props.put("org.omg.CORBA.ORBInitialHost", "localhost");
-            ORB orb = ORB.init(new String [1], props);       
+            props.put("org.omg.CORBA.ORBInitialHost", "10.0.5.138");
+            ORB orb = ORB.init(args, props);       
             
             POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
             rootpoa.the_POAManager().activate();
@@ -84,7 +82,7 @@ class Client extends Thread{
             
             Properties props = new Properties();
             props.put("org.omg.CORBA.ORBInitialPort", "1050");
-            props.put("org.omg.CORBA.ORBInitialHost", "localhost");
+            props.put("org.omg.CORBA.ORBInitialHost", "10.0.5.138");
             
             ORB orb = ORB.init(new String [1],props);
             org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");

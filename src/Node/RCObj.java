@@ -28,10 +28,12 @@ public class RCObj extends RemoteClientPOA{
 	    System.out.println("[RCObj]: Writing data");
 	    
 	    if(data.length > length)
-                System.out.println("FIN DEL ARCHIVO");
+                System.out.println("[RCObj]: FIN DEL ARCHIVO");
 	    
 	}
-	catch(Exception e){}
+	catch(Exception e){
+	    e.getStackTrace();
+	}
 	
     }
     
