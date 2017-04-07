@@ -79,7 +79,7 @@ class Server extends java.lang.Thread
 	    NameComponent path[] = ncRef.to_name(serviceName);
 	    ncRef.rebind(path, href);
 
-	    System.out.println("[Servant]: Listener ready");
+	    System.out.println("[Server Servant]: Listener ready");
 
 	    while ( true )
 	    {
@@ -89,7 +89,7 @@ class Server extends java.lang.Thread
 	}
 	catch ( Exception e )
 	{
-	    System.out.println("[Servant]: Exception");
+	    System.out.println("[Server Servant]: Exception");
 	    e.getStackTrace();
 	}
     }

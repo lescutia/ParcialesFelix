@@ -1,7 +1,7 @@
 module dms{
 
     typedef sequence<octet> Data;
-    typedef sequence<string> fileList;
+    typedef sequence<string> FileList;
 
     interface RemoteClient {
         void WriteFile( in string fileName , in Data data , in long length, in double fileLength);
@@ -10,5 +10,9 @@ module dms{
     interface RemoteServer {
         void GetFile( in string fileName , in RemoteClient rCRef ); 
     };  
+
+    interface RemoteLeader {
+        void update( in string owner , in FileList fileList);
+    };
         
 };
