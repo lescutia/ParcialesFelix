@@ -18,17 +18,21 @@ public class RCObj extends RemoteClientPOA{
         
 	try{
 	    
+	    System.out.println(fileName);
 	    File file = new File(fileName);
-            file.createNewFile();
-            FileOutputStream fos = new FileOutputStream(file,true);
+	    file.createNewFile();
+            System.out.println(file.getName());
+	    FileOutputStream fos = new FileOutputStream(file,true);
             fos.write(data,0,length);
             fos.flush();
             fos.close();
 	    
 	    System.out.println("[RCObj]: Writing data");
 	    
-	    if(data.length > length)
-                System.out.println("[RCObj]: FIN DEL ARCHIVO");
+	    if(data.length > length){
+		System.out.println("[RCObj]: FIN DEL ARCHIVO");
+	    }
+                
 	    
 	}
 	catch(Exception e){

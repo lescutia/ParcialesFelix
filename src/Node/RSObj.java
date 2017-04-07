@@ -33,14 +33,17 @@ public class RSObj extends RemoteServerPOA{
                     FileInputStream fis = new FileInputStream(file);	
                     byte [] data = new byte[1024*1024];						
                     int fileLength = fis.read(data);
-		    
+		    System.out.println("[RSObj]: File length: "+fileLength);
 		    while( fileLength>0 ){
 			rCRef.WriteFile(fileName, data, fileLength);
 			fileLength = fis.read(data);
 		    }
 		    
                 }
-                catch(Exception e){}
+                catch(Exception e){
+		    System.out.println("[RSObj]: Exception");
+		    e.getStackTrace();
+		}
             }
         }).start();
         

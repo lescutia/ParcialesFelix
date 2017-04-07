@@ -15,7 +15,7 @@ public class Globals {
 		    Resource Variables
     ********************************************************/
     
-    public static String m_strDownloadPath = "C:\\Users\\gamaa_000\\Desktop\\Resources\\Download\\";
+    public static String m_strDownloadPath = "C:\\Users\\gamaa\\Desktop\\Resources\\";
     public static String m_strSharedDirPath = "C:\\Users\\gamaa_000\\Desktop\\Resources\\";
     
     
