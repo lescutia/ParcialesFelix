@@ -20,15 +20,16 @@ public class Globals
     /*< Flag to active or disable debug mode in class LeaderListen. */
     public static boolean m_bDebugLeader 	= true;
     
+    
     /********************************************************
 		    Port Variables
     ********************************************************/
-    
     
     /*< Port to find leader and leader listener to attend new nodes. */
 	public static int m_iPortLeaderListener		= 10000;
     /*< Time in miliseconds to wait for leader reply. */
 	public static int m_iTimeOutLeaderSearch	= 2000;
+	public static int m_iORBInitialPort		= 1050;
 
 	
     /********************************************************

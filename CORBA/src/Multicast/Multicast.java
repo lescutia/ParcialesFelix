@@ -34,8 +34,6 @@ public class Multicast {
 		    byte [] data = new byte[1024];
 		    String msg;
 		    Node.Globals.PrintMessage("[Multicast/Listener]: Listening for new nodes...", Node.Globals.m_bDebugLeader );
-		    //if( Globals.m_bDebugLeader )
-		    //System.out.println("[Leader Listener]: Listening for new nodes...");
 		    while(true){
 			DatagramPacket packet = new DatagramPacket(data,data.length);
 			socket.receive(packet);

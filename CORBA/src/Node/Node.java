@@ -12,23 +12,22 @@ package Node;
 import dms.*;
 import Multicast.*;
 import org.omg.CosNaming.*;
-import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
 import org.omg.PortableServer.*;
 import org.omg.PortableServer.POA;
 import java.util.Properties;
+import java.io.IOException;
 
 public class Node
 {
 
     public static void main( String args[] )
     {
+	    Multicast multicast = new Multicast();
+	    multicast.startListener();
+	    Server service = new Server("fileserver");
+	    service.start();
 	
-	Multicast multicast = new Multicast();
-	multicast.startListener();
-	//Server service = new Server("fileserver");
-	//service.start();
-
     }
 
 
