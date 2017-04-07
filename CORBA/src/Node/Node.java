@@ -10,6 +10,7 @@ package Node;
  * @author gamaa_000
  */
 import dms.*;
+import Multicast.*;
 import org.omg.CosNaming.*;
 import org.omg.CosNaming.NamingContextPackage.*;
 import org.omg.CORBA.*;
@@ -22,9 +23,11 @@ public class Node
 
     public static void main( String args[] )
     {
-
-	Server service = new Server("fileserver");
-	service.start();
+	
+	Multicast multicast = new Multicast();
+	multicast.startListener();
+	//Server service = new Server("fileserver");
+	//service.start();
 
     }
 
