@@ -20,8 +20,8 @@ import java.util.Properties;
 public class Node {
     public static void main(String args[]){
         
-        Server service = new Server("Gamaliel");
-        service.start();
+        Client client = new Client();
+        client.start();
         
     }
 }
@@ -71,33 +71,33 @@ class Server extends java.lang.Thread {
 
 class Client extends Thread{
    
-    String args[];
     void Client(){
         
     }
-    
-    void Run(){
+    @Override
+    public void run(){
         
         try{
-            
+            String args[] = null; 
             Properties props = new Properties();
             props.put("org.omg.CORBA.ORBInitialPort", "1050");
-            props.put("org.omg.CORBA.ORBInitialHost", "10.0.5.138");
+            props.put("org.omg.CORBA.ORBInitialHost", "localhost");
             
-            ORB orb = ORB.init(new String [1],props);
+            ORB orb = ORB.init(args,props);
+            
             org.omg.CORBA.Object objRef = orb.resolve_initial_references("NameService");
             NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
-            RemoteServer rsobj = (RemoteServer) RemoteServerHelper.narrow(ncRef.resolve_str("Gamaliel"));
-            
+            RemoteServer rsobj = RemoteServerHelper.narrow(ncRef.resolve_str("fileserver"));
             System.out.println("[Client]: Requesting service");
             
             POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
             rootpoa.the_POAManager().activate();
+            
             RCObj rcobj = new RCObj();
             org.omg.CORBA.Object ref = rootpoa.servant_to_reference(rcobj);
             RemoteClient rcref = RemoteClientHelper.narrow(ref);
-            
-            rsobj.GetFile("ExampleFILE", rcref);
+            rsobj.GetFile("naive.pdf", rcref);
+            orb.run();
             
         }
         catch(Exception e){
