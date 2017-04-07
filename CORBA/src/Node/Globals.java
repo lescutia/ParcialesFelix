@@ -9,16 +9,14 @@ package Node;
  *
  * @author gamaa_000
  */
-public class Globals {
-    
-    /********************************************************
-		    Resource Variables
-    ********************************************************/
-    
-    public static String m_strDownloadPath = "C:\\Users\\gamaa\\Desktop\\Resources\\";
-    public static String m_strSharedDirPath = "C:\\Users\\gamaa_000\\Desktop\\Resources\\";
-    
-    
-    
-    
+public class Globals
+{
+    /**
+     * ******************************************************
+     * Resource Variables
+    *******************************************************
+     */
+    public static String m_strDownloadPath = "C:\\Users\\Adrian Gonzalez\\Desktop\\descargas\\";
+    public static String m_strSharedDirPath = "C:\\Users\\Adrian Gonzalez\\Desktop\\descargas\\";
+
 }
