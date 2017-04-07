@@ -41,6 +41,13 @@ public class Globals
     /*< ID of the leader of the group. */
     public static String m_strLeaderId	= "";
     
+    /********************************************************
+		   Network Variables
+    ********************************************************/
+    
+    public static boolean m_BoolIsLeader    = true;
+    
+    
     /**
     * ******************************************************
     *		    Resource Variables

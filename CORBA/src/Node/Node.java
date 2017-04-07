@@ -23,10 +23,19 @@ public class Node
 
     public static void main( String args[] )
     {
-	    Multicast multicast = new Multicast();
-	    multicast.startListener();
+	 
 	    Server service = new Server("fileserver");
 	    service.start();
+	    
+	    if(Globals.m_BoolIsLeader){
+		Multicast multicast = new Multicast();
+		multicast.startListener();
+		System.out.println("[Node]: Leader LocalHost");
+	    }
+	    else{
+		Multicast client = new Multicast();
+		client.findLeader();
+	    }
 	
     }
 
