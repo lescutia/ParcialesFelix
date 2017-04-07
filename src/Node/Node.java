@@ -20,7 +20,7 @@ import java.util.Properties;
 public class Node {
     public static void main(String args[]){
         
-        Server service = new Server("Gamaliel");
+        Server service = new Server("fileserver");
         service.start();
         
     }
