@@ -30,6 +30,8 @@ public class Node
 	    if(Globals.m_BoolIsLeader){
 		Multicast multicast = new Multicast();
 		multicast.startListener();
+		LeaderInitializer leader = new LeaderInitializer();
+		leader.start();
 		System.out.println("[Node]: Leader LocalHost");
 	    }
 	    else{
@@ -79,7 +81,7 @@ class Server extends java.lang.Thread
 	    NameComponent path[] = ncRef.to_name(serviceName);
 	    ncRef.rebind(path, href);
 
-	    System.out.println("[Server Servant]: Listener ready");
+	    System.out.println("[FileServer Servant]: Listener ready");
 
 	    while ( true )
 	    {
@@ -89,7 +91,7 @@ class Server extends java.lang.Thread
 	}
 	catch ( Exception e )
 	{
-	    System.out.println("[Server Servant]: Exception");
+	    System.out.println("[FileServer Servant]: Exception");
 	    e.getStackTrace();
 	}
     }
