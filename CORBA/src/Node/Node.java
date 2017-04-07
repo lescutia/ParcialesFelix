@@ -23,7 +23,7 @@ public class Node
     public static void main( String args[] )
     {
 
-	Client service = new Client();
+	Server service = new Server("fileserver");
 	service.start();
 
     }
@@ -50,7 +50,7 @@ class Server extends java.lang.Thread
 	    String args[] = null;
 	    Properties props = new Properties();
 	    props.put("org.omg.CORBA.ORBInitialPort", "1050");
-	    props.put("org.omg.CORBA.ORBInitialHost", "10.0.5.138");
+	    props.put("org.omg.CORBA.ORBInitialHost", "localhost");
 	    ORB orb = ORB.init(args, props);
 
 	    POA rootpoa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));

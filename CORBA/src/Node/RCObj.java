@@ -29,8 +29,8 @@ public class RCObj extends RemoteClientPOA
 	    fos.write(data, 0, length);
 	    fos.flush();
 	    fos.close();
-
-	    System.out.println("[RCObj]: Writing data");
+	    
+	    System.out.println("[RCObj]: Writing data "+data.length);
 
 	    if ( data.length > length )
 	    {
