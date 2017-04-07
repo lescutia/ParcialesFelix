@@ -17,7 +17,7 @@ public class RCObj extends RemoteClientPOA
 {
 
     @Override
-    public void WriteFile( String fileName, byte[] data, int length )
+    public void WriteFile( String fileName, byte[] data, int length, double fileLength )
     {
 
 	try
@@ -25,12 +25,13 @@ public class RCObj extends RemoteClientPOA
 
 	    File file = new File(Globals.m_strDownloadPath + fileName);
 	    file.createNewFile();
+	    double actualFileLength = file.length();
 	    FileOutputStream fos = new FileOutputStream(file, true);
 	    fos.write(data, 0, length);
 	    fos.flush();
 	    fos.close();
-	    
-	    System.out.println("[RCObj]: Writing data "+data.length);
+	    double progress = (actualFileLength/fileLength)*100;
+	    System.out.println("[RCObj]: Writing data "+"("+progress+")");
 
 	    if ( data.length > length )
 	    {

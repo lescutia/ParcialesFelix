@@ -31,12 +31,13 @@ public class RSObj extends RemoteServerPOA{
 		    System.out.println("[RSObj]: Sending "+fileName);
                     File file = new File(Globals.m_strSharedDirPath+fileName);			 
                     FileInputStream fis = new FileInputStream(file);	
+		    double fileLength = file.length();
                     byte [] data = new byte[1024*1024];						
-                    int fileLength = fis.read(data);
-		    System.out.println("[RSObj]: File length: "+fileLength);
-		    while( fileLength>0 ){
-			rCRef.WriteFile(fileName, data, fileLength);
-			fileLength = fis.read(data);
+                    int dataLength = fis.read(data);
+		    System.out.println("[RSObj]: File length: "+dataLength);
+		    while( dataLength>0 ){
+			rCRef.WriteFile(fileName, data, dataLength, fileLength);
+			dataLength = fis.read(data);
 		    }
 		    
                 }

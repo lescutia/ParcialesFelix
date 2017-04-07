@@ -4,7 +4,7 @@ module dms{
     typedef sequence<string> fileList;
 
     interface RemoteClient {
-        void WriteFile( in string fileName , in Data data , in long length);
+        void WriteFile( in string fileName , in Data data , in long length, in double fileLength);
     };
 
     interface RemoteServer {
