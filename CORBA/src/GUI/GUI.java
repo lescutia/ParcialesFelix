@@ -53,6 +53,7 @@ public class GUI extends javax.swing.JFrame {
 
         jButton2.setText("Refresh");
         jButton2.setBorderPainted(false);
+        jButton2.setEnabled(false);
         jButton2.setName("refresh"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +62,7 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jButton3.setText("Download");
+        jButton3.setEnabled(false);
         jButton3.setName("download"); // NOI18N
         jButton3.setPreferredSize(new java.awt.Dimension(75, 32));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
