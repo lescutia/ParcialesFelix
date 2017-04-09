@@ -1,2 +1,2 @@
-C:\Users\gamaa\Desktop\Resources\
-C:\Users\gamaa\Desktop\Resources\
+/home/blackhawk/Desktop/Resources
+/home/blackhawk/Desktop/Resources
