@@ -15,7 +15,7 @@ public interface CRemoteService extends Remote
     *   @Param in_strFile is the name of the file wanted to download.
     *   @Return byte array with the data of the file.
     */
-    public void requestFile( String in_strFile , FileTransfer.CCallBackIMP in_Ref) throws RemoteException;
+    public void requestFile( String in_strFile , FileTransfer.CCallback in_Ref) throws RemoteException;
     
     /*
     *   @Param in_strFile is the name of the file wanted to download.

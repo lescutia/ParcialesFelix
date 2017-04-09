@@ -18,7 +18,8 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
     public CCallBackIMP() throws RemoteException{};
     
     @Override
-    public void writeData( String inFileName , byte[] data, int fileLength ){
+    public void writeData( String inFileName , byte[] data, int fileLength ) throws RemoteException
+    {
         
         try{
             File file = new File(inFileName);

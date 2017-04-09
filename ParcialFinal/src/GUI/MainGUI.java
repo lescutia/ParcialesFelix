@@ -62,6 +62,10 @@ public class MainGUI extends javax.swing.JFrame
             }
         });
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.setRootVisible(false);
+        jTree1.setSelectionModel(null);
         jScrollPane1.setViewportView(jTree1);
 
         refresh.setText("Refresh");
