@@ -8,6 +8,9 @@
 **************************************************************************/
 
 package Global;
+import java.io.*;
+//import java.lang.System.*;
+import java.util.Scanner;
 
 public class CGlobals 
 {
@@ -43,4 +46,34 @@ public class CGlobals
     public static String m_strDownloadPath = "";
     public static String m_strSharedDirPath = "";
     
+    public static void saveConfig()
+    {
+        try
+        {
+            FileWriter fw = new FileWriter( "config.txt" );
+            PrintWriter pw = new PrintWriter( fw );
+            
+            pw.println( m_strDownloadPath );
+            pw.println( m_strSharedDirPath );
+            pw.close();
+        }
+        catch( IOException e ) {}
+    }
+    
+    public static void loadConfig()
+    {
+        try
+        {
+            File file = new File( "config.txt" );
+            Scanner br = new Scanner( file );
+            
+            if( br.hasNext() )
+            {
+                m_strDownloadPath = br.nextLine();
+                m_strSharedDirPath = br.nextLine();
+            }
+            br.close();
+        }
+        catch( IOException e ) {}
+    }
 }

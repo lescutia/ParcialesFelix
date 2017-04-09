@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import Global.CGlobals;
 /**
  *
  * @author gamaa_000
@@ -119,6 +119,7 @@ public class MainGUI extends javax.swing.JFrame
     static SettingsGUI settingsGUI;
     private void settingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_settingsActionPerformed
     {//GEN-HEADEREND:event_settingsActionPerformed
+        CGlobals.loadConfig();
         if( settingsGUI == null )
         {
             settingsGUI = new SettingsGUI( download, refresh );

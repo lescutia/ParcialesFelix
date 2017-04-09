@@ -29,20 +29,16 @@ public class SettingsGUI extends javax.swing.JFrame
         m_cachedDownloadBtn = in_DownloadBtn;
         m_cachedSharedBtn = in_SharedBtn;
 
-        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
-        {
-            login.setEnabled( true );
-        }
         initComponents();
+        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
+            login.setEnabled( true );
     }
 
     public SettingsGUI()
     {
-        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
-        {
-            login.setEnabled( true );
-        }
         initComponents();
+        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
+            login.setEnabled( true );
     }
 
     /**
@@ -120,12 +116,11 @@ public class SettingsGUI extends javax.swing.JFrame
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_loginActionPerformed
     {//GEN-HEADEREND:event_loginActionPerformed
+        CGlobals.saveConfig();
         m_cachedDownloadBtn.setEnabled( true );
         m_cachedSharedBtn.setEnabled( true );
-        CFileService test = new CFileService();
-        test.startFileService();
-        //ConnectionService connection = new ConnectionService();
-        //connection.findLeader();
+        //CFileService test = new CFileService();
+        //test.startFileService();
         //TODO: check if it could connect to the leader.
         this.dispose();//not yet, after connection
         
