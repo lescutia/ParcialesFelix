@@ -119,8 +119,8 @@ public class SettingsGUI extends javax.swing.JFrame
         CGlobals.saveConfig();
         m_cachedDownloadBtn.setEnabled( true );
         m_cachedSharedBtn.setEnabled( true );
-        //CFileService test = new CFileService();
-        //test.startFileService();
+        CFileService test = new CFileService();
+        test.startFileService();
         //TODO: check if it could connect to the leader.
         this.dispose();//not yet, after connection
         
@@ -134,7 +134,7 @@ public class SettingsGUI extends javax.swing.JFrame
         jfc.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
         
         if( jfc.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION )
-            CGlobals.m_strSharedDirPath = jfc.getSelectedFile().getPath() + "\\";
+            CGlobals.m_strSharedDirPath = jfc.getSelectedFile().getPath();
         
         if( !CGlobals.m_strSharedDirPath.equals("") && !CGlobals.m_strDownloadPath.equals("") )
             login.setEnabled( true );
@@ -148,7 +148,7 @@ public class SettingsGUI extends javax.swing.JFrame
         jfc.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
         
         if( jfc.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION )
-            CGlobals.m_strDownloadPath = jfc.getSelectedFile().getPath() + "\\";
+            CGlobals.m_strDownloadPath = jfc.getSelectedFile().getPath();
         
         if( !CGlobals.m_strSharedDirPath.equals("") && !CGlobals.m_strDownloadPath.equals("") )
             login.setEnabled( true );

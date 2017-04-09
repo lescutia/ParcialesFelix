@@ -1,2 +1,2 @@
-C:\Users\gamaa\Documents\NetBeansProjects\ParcialesFelix\ParcialFinal\
-C:\Users\gamaa\Documents\NetBeansProjects\ParcialesFelix\ParcialFinal\
+/home/blackhawk/Desktop/Resources
+/home/blackhawk/Desktop/Resources

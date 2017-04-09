@@ -35,7 +35,8 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
                 try
                 {
                     System.out.println("Request received");
-                    File file = new File( CGlobals.m_strSharedDirPath+in_strFileName );
+                    File dir = new File(System.getProperty(CGlobals.m_strSharedDirPath));
+                    File file = new File( dir ,in_strFileName );
                     FileInputStream fis = new FileInputStream(file);
                     byte []data = new byte[1024*1024];
                     int dataLength = fis.read(data);
