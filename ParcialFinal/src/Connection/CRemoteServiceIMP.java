@@ -21,8 +21,6 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
     public CRemoteServiceIMP() throws RemoteException
     {
     }
-
-    ;
     
     @Override
     public void requestFile( String in_strFileName, FileTransfer.CCallback in_Ref ) throws RemoteException
