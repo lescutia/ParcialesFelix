@@ -57,7 +57,7 @@ public class CFileService
 
             Registry registry = LocateRegistry.getRegistry( m_sHostName );
             CRemoteService roObj = null;
-            roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + "FileServer" );
+            roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + CGlobals.m_iRemoteObjectPort + "/FileServer" );
             CCallBackIMP rObj = new CCallBackIMP();
 
             roObj.requestFile( sFileName, rObj );

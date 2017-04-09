@@ -10,9 +10,12 @@
 package FileTransfer;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.rmi.server.UnicastRemoteObject;
+import java.rmi.RemoteException;
 
-public class CCallBackIMP implements CCallback
+public class CCallBackIMP extends UnicastRemoteObject implements CCallback
 {
+    public CCallBackIMP() throws RemoteException{};
     
     @Override
     public void writeData( String inFileName , byte[] data, int fileLength ){
