@@ -10,7 +10,7 @@
 
 package Connection;
 
-import Global.Globals;
+import Global.CGlobals;
 import java.io.*;
 import java.net.*;
 
@@ -43,12 +43,12 @@ public class ConnectionService
         try
         {
             String msg = InetAddress.getLocalHost().getHostAddress();
-            InetAddress group = InetAddress.getByName( Globals.m_strGroupId );
+            InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
             byte[] data = msg.getBytes();
-            DatagramSocket socket = new DatagramSocket( Globals.m_iPortLeaderListener );
-            DatagramPacket datagram = new DatagramPacket( data, data.length, group, Globals.m_iPortLeaderListener );
+            DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener );
+            DatagramPacket datagram = new DatagramPacket( data, data.length, group, CGlobals.m_iPortLeaderListener );
             
-            if ( Globals.m_bDebugConnection )
+            if ( CGlobals.m_bDebugConnection )
             {
                 System.out.println( "[Node]: Looking for system leader" );
             }
@@ -59,20 +59,20 @@ public class ConnectionService
                 try
                 {
                     socket.send( datagram );
-                    socket.setSoTimeout( Globals.m_iTimeOutLeaderSearch );
+                    socket.setSoTimeout(CGlobals.m_iTimeOutLeaderSearch );
                     data = new byte[1024];
                     DatagramPacket packet = new DatagramPacket( data, data.length );
                     socket.receive( packet );
                     String remoteIP = packet.getAddress().toString();
                     remoteIP = remoteIP.replace( "/", "" );
-                    if( Globals.m_bDebugConnection )
+                    if( CGlobals.m_bDebugConnection )
                         System.out.println( "[Connection]: Response from: " + remoteIP);
-                    Globals.m_strLeaderId = remoteIP;
+                    CGlobals.m_strLeaderId = remoteIP;
                     break;
                 } 
                 catch ( SocketTimeoutException e )
                 {
-                    if( Globals.m_bDebugConnection )
+                    if( CGlobals.m_bDebugConnection )
                         System.out.println( "[Connection]: Leader search timeout" );
                 }
                 m_iTryAttempt++;
@@ -82,12 +82,12 @@ public class ConnectionService
         } 
         catch(UnknownHostException uhe)
         {
-            if( Globals.m_bDebugConnection && Globals.m_bDebugExceptions  )
+            if( CGlobals.m_bDebugConnection && CGlobals.m_bDebugExceptions  )
                 uhe.getStackTrace();
         }
         catch(IOException ioe)
         {
-            if( Globals.m_bDebugConnection && Globals.m_bDebugExceptions  )
+            if( CGlobals.m_bDebugConnection && CGlobals.m_bDebugExceptions  )
                 ioe.getStackTrace();
         }
     }

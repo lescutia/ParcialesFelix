@@ -7,7 +7,7 @@ package GUI;
 
 import Connection.ConnectionService;
 import javax.swing.JFileChooser;
-import Global.Globals;
+import Global.CGlobals;
 import javax.swing.JButton;
 import Connection.*;
 
@@ -29,7 +29,7 @@ public class SettingsGUI extends javax.swing.JFrame
         m_cachedDownloadBtn = in_DownloadBtn;
         m_cachedSharedBtn = in_SharedBtn;
 
-        if ( !Globals.m_strSharedDirPath.equals( "" ) && !Globals.m_strDownloadPath.equals( "" ) )
+        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
         {
             login.setEnabled( true );
         }
@@ -38,7 +38,7 @@ public class SettingsGUI extends javax.swing.JFrame
 
     public SettingsGUI()
     {
-        if ( !Globals.m_strSharedDirPath.equals( "" ) && !Globals.m_strDownloadPath.equals( "" ) )
+        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
         {
             login.setEnabled( true );
         }
@@ -122,8 +122,10 @@ public class SettingsGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_loginActionPerformed
         m_cachedDownloadBtn.setEnabled( true );
         m_cachedSharedBtn.setEnabled( true );
-        ConnectionService connection = new ConnectionService();
-        connection.findLeader();
+        CFileService test = new CFileService();
+        test.startFileService();
+        //ConnectionService connection = new ConnectionService();
+        //connection.findLeader();
         //TODO: check if it could connect to the leader.
         this.dispose();//not yet, after connection
         
@@ -137,9 +139,9 @@ public class SettingsGUI extends javax.swing.JFrame
         jfc.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
         
         if( jfc.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION )
-            Globals.m_strSharedDirPath = jfc.getSelectedFile().getPath() + "\\";
+            CGlobals.m_strSharedDirPath = jfc.getSelectedFile().getPath() + "\\";
         
-        if( !Globals.m_strSharedDirPath.equals("") && !Globals.m_strDownloadPath.equals("") )
+        if( !CGlobals.m_strSharedDirPath.equals("") && !CGlobals.m_strDownloadPath.equals("") )
             login.setEnabled( true );
     }//GEN-LAST:event_sharedDirActionPerformed
 
@@ -151,9 +153,9 @@ public class SettingsGUI extends javax.swing.JFrame
         jfc.setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
         
         if( jfc.showOpenDialog( this ) == JFileChooser.APPROVE_OPTION )
-            Globals.m_strDownloadPath = jfc.getSelectedFile().getPath() + "\\";
+            CGlobals.m_strDownloadPath = jfc.getSelectedFile().getPath() + "\\";
         
-        if( !Globals.m_strSharedDirPath.equals("") && !Globals.m_strDownloadPath.equals("") )
+        if( !CGlobals.m_strSharedDirPath.equals("") && !CGlobals.m_strDownloadPath.equals("") )
             login.setEnabled( true );
     }//GEN-LAST:event_downloadDirActionPerformed
 
