@@ -12,7 +12,7 @@ import FileTransfer.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.Naming;
-import Global.CGlobals;
+import Global.*;
 
 
 public class CFileService
@@ -34,7 +34,7 @@ public class CFileService
             }
             LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
             CRemoteServiceIMP rsIMPObj = new CRemoteServiceIMP();
-            Naming.rebind( "//localhost:" + CGlobals.m_iRemoteObjectPort + "/FileServer", rsIMPObj );
+            Naming.rebind( "//"+CGlobals.m_strLocalHost+  + CGlobals.m_iRemoteObjectPort + "/FileServer", rsIMPObj );
             System.out.println( "[CFileService]: FileService ready." );
 
         } catch ( Exception e )

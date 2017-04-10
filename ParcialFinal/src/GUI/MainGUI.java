@@ -115,7 +115,7 @@ public class MainGUI extends javax.swing.JFrame
     private void downloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_downloadActionPerformed
     {//GEN-HEADEREND:event_downloadActionPerformed
         CFileService client = new CFileService();
-        client.downloadFile("naive.pdf","10.0.5.168");
+        client.downloadFile("naive.pdf","192.168.0.8");
     }//GEN-LAST:event_downloadActionPerformed
     
     static SettingsGUI settingsGUI;

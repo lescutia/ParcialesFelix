@@ -67,7 +67,7 @@ public class CGlobals
         try
         {
             m_strLocalHost = Connection.NetworkUtils.getLocalIP();
-            System.setProperty("java.rmi.server.hostname",m_strLocalHost);
+                System.setProperty("java.rmi.server.hostname",m_strLocalHost);
             
             File file = new File( "config.txt" );
             Scanner br = new Scanner( file );

@@ -18,11 +18,13 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
     public CCallBackIMP() throws RemoteException{};
     
     @Override
-    public void writeData( String inFileName , byte[] data, int fileLength ) throws RemoteException
+    public void writeData( String inFileName , byte[] data, long fileLength ) throws RemoteException
     {
         
         try{
-            File file = new File(inFileName);
+            System.out.println("File size ["+inFileName+"]:"+fileLength);
+            File dir = new File(Global.CGlobals.m_strDownloadPath);
+            File file = new File(dir,inFileName);
             file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file, true);
             fos.write( data , 0 , data.length );
