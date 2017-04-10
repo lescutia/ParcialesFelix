@@ -6,7 +6,7 @@
 
 	brief: Contains the interface methods for remote service implementation.
 **************************************************************************/
-package Connection;
+package FileTransfer;
 import java.rmi.*;
 
 public interface CRemoteService extends Remote

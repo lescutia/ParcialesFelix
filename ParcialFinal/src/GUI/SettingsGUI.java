@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import FileTransfer.CFileService;
 import Connection.ConnectionService;
 import javax.swing.JFileChooser;
 import Global.CGlobals;

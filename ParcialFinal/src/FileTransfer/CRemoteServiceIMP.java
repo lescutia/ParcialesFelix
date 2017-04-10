@@ -7,7 +7,7 @@
  * brief: Contains method implementations of the remote service for
  * managing the file transfers with RMI.
  ************************************************************************* */
-package Connection;
+package FileTransfer;
 
 import Global.CGlobals;
 import java.rmi.server.UnicastRemoteObject;

@@ -6,12 +6,14 @@
  *
  * brief: Contains methods for managing the file transfers.
  ************************************************************************* */
-package Connection;
+package FileTransfer;
 
-import FileTransfer.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import Global.*;
 
 
@@ -36,10 +38,13 @@ public class CFileService
             Naming.rebind( "//"+CGlobals.m_strLocalHost+ ":" + CGlobals.m_iRemoteObjectPort + "/FileServer", rsIMPObj );
             System.out.println( "[CFileService]: FileService ready." );
 
-        } catch ( Exception e )
+        } catch ( RemoteException e )
         {
             System.out.println( "[CFileService]: Valio verga" );
             e.printStackTrace();
+        }
+        catch(MalformedURLException e ){
+            e.getStackTrace();
         }
     }
 
@@ -60,9 +65,15 @@ public class CFileService
 
             roObj.requestFile( sFileName, rObj );
             
-        } catch ( Exception e )
+        } catch ( RemoteException e )
         {
             System.out.println( "[CFileService]: Valio verga" );
+            e.printStackTrace();
+        }
+        catch(MalformedURLException e ){
+            e.printStackTrace();
+        }
+        catch(NotBoundException e){
             e.printStackTrace();
         }
 

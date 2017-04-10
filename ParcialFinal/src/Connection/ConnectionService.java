@@ -45,7 +45,8 @@ public class ConnectionService
             String msg = InetAddress.getLocalHost().getHostAddress();
             InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
             byte[] data = msg.getBytes();
-            DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener );
+            MulticastSocket socket = new MulticastSocket( CGlobals.m_iPortLeaderListener );
+            socket.joinGroup(group);
             DatagramPacket datagram = new DatagramPacket( data, data.length, group, CGlobals.m_iPortLeaderListener );
             
             if ( CGlobals.m_bDebugConnection )

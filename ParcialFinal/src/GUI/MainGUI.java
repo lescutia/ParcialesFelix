@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import FileTransfer.CFileService;
 import Global.CGlobals;
 import Connection.*;
 /**
@@ -114,8 +115,10 @@ public class MainGUI extends javax.swing.JFrame
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_downloadActionPerformed
     {//GEN-HEADEREND:event_downloadActionPerformed
-        CFileService client = new CFileService();
-        client.downloadFile("naive.pdf","192.168.0.8");
+        //CFileService client = new CFileService();
+        //client.downloadFile("naive.pdf","10.0.5.168");
+        Connection.ConnectionService cs = new Connection.ConnectionService();
+        cs.findLeader();
     }//GEN-LAST:event_downloadActionPerformed
     
     static SettingsGUI settingsGUI;

@@ -5,7 +5,7 @@
  */
 package ResoruceUpdate;
 
-import Connection.CRemoteServiceIMP;
+import FileTransfer.CRemoteServiceIMP;
 import Global.CGlobals;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
