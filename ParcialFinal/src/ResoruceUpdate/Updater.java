@@ -5,8 +5,13 @@
  */
 package ResoruceUpdate;
 
+import Connection.CRemoteServiceIMP;
+import Global.CGlobals;
+import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.RemoteException;
+import java.net.MalformedURLException;
 
 /**
  *
@@ -21,7 +26,23 @@ public class Updater {
                 System.setProperty( "java.security.policy", "security.policy" );
             Registry registry = LocateRegistry.getRegistry( "" );
         }
-        catch(Exception e){
+        catch(RemoteException e){
+            e.getStackTrace();
+        }
+    }
+    
+    public void startServerDaemon(){
+        if ( System.getSecurityManager() == null )
+            System.setProperty( "java.security.policy", "security.policy" );
+        try{
+            LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
+            CRemoteServiceIMP rsIMPObj = new CRemoteServiceIMP();
+            Naming.rebind( "//"+CGlobals.m_strLocalHost+ ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer", rsIMPObj );
+        }
+        catch(RemoteException e){
+            e.getStackTrace();
+        }
+        catch(MalformedURLException e){
             e.getStackTrace();
         }
     }

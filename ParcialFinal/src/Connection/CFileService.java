@@ -29,9 +29,8 @@ public class CFileService
         {
 
             if ( System.getSecurityManager() == null )
-            {
                 System.setProperty( "java.security.policy", "security.policy" );
-            }
+            
             LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
             CRemoteServiceIMP rsIMPObj = new CRemoteServiceIMP();
             Naming.rebind( "//"+CGlobals.m_strLocalHost+ ":" + CGlobals.m_iRemoteObjectPort + "/FileServer", rsIMPObj );
