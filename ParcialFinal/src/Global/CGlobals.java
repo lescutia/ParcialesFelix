@@ -29,6 +29,8 @@ public class CGlobals
     public static String m_strGroupId   = "224.0.0.3";
     /*< ID of the leader of the group. */
     public static String m_strLeaderId  = "";
+    /*< Local host IP address. */
+    public static String m_strLocalHost = "";
 	
     /********************************************************
 			Port Variables
@@ -64,6 +66,9 @@ public class CGlobals
     {
         try
         {
+            m_strLocalHost = Connection.NetworkUtils.getLocalIP();
+            System.setProperty("java.rmi.server.hostname",m_strLocalHost);
+            
             File file = new File( "config.txt" );
             Scanner br = new Scanner( file );
             
@@ -76,4 +81,5 @@ public class CGlobals
         }
         catch( IOException e ) {}
     }
+    
 }

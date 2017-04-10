@@ -5,6 +5,7 @@
  */
 package GUI;
 import Global.CGlobals;
+import Connection.*;
 /**
  *
  * @author gamaa_000
@@ -113,7 +114,8 @@ public class MainGUI extends javax.swing.JFrame
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_downloadActionPerformed
     {//GEN-HEADEREND:event_downloadActionPerformed
-        //TODO: download archive
+        CFileService client = new CFileService();
+        client.downloadFile("naive.pdf","10.0.5.168");
     }//GEN-LAST:event_downloadActionPerformed
     
     static SettingsGUI settingsGUI;

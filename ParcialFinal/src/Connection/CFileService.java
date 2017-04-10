@@ -10,7 +10,6 @@ package Connection;
 
 import FileTransfer.*;
 import java.rmi.registry.LocateRegistry;
-import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.Registry;
 import java.rmi.Naming;
 import Global.CGlobals;

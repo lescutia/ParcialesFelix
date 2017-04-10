@@ -16,6 +16,6 @@ public interface ResourceUpdate extends Remote{
     /*
     *   @Param fileList is the list of available resources.
     */
-    public void update(ArrayList fileList) throws RemoteException;
+    public void update(String owner, ArrayList<String> fileList) throws RemoteException;
     
 }

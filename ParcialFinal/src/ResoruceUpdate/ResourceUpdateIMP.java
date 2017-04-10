@@ -4,14 +4,23 @@
  * and open the template in the editor.
  */
 package ResoruceUpdate;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.rmi.RemoteException;
 /**
  *
  * @author gamaa
  */
-public class ResourceUpdateIMP implements ResourceUpdate{
+public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUpdate{
+    public ResourceUpdateIMP() throws RemoteException
+    {
+    }
+    
     @Override
-    public void update(ArrayList list){
-        System.out.println();
+    public void update(String owner, ArrayList<String> list) throws RemoteException{
+        System.out.println("Elements in "+owner);
+        for(String element : list){
+            System.out.println(element);
+        }
     } 
 }
