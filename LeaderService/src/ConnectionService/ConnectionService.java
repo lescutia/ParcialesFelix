@@ -10,11 +10,12 @@ import java.io.IOException;
  *
  * @author gamaa
  */
+
 public class ConnectionService {
     public void ConnectionService( int port ){
         try{
             
-            InetAddress group = InetAddress.getByName("224.0.0.3");
+            InetAddress group = InetAddress.getByName("224.0.0.5");
             MulticastSocket socket = new MulticastSocket(port);
             DatagramSocket replySocket = new DatagramSocket();
             socket.joinGroup(group);
@@ -26,6 +27,7 @@ public class ConnectionService {
                 
                 DatagramPacket packet = new DatagramPacket(data,data.length);
                 socket.receive(packet);
+                System.out.println("Received!");
                 msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
                 
                 System.out.println("[ConnectionService]: Request received: "+msg);
@@ -38,13 +40,13 @@ public class ConnectionService {
             
         }
         catch(SocketException e){
-                e.getMessage();
+                e.printStackTrace();
         }		
         catch(UnknownHostException e){
-                e.getMessage();
+                e.printStackTrace();
         }	
         catch(IOException e){
-                e.getStackTrace();
+                e.printStackTrace();
         }
     }
     
