@@ -17,7 +17,6 @@ public class ConnectionService {
             
             InetAddress group = InetAddress.getByName("224.0.0.5");
             MulticastSocket socket = new MulticastSocket(port);
-            DatagramSocket replySocket = new DatagramSocket();
             socket.joinGroup(group);
             byte [] data = new byte[1024];
             String msg;
@@ -34,7 +33,7 @@ public class ConnectionService {
                 String replyMsg = InetAddress.getLocalHost().toString();
                 data = replyMsg.getBytes();
                 DatagramPacket replyPacket = new DatagramPacket(data, data.length, InetAddress.getByName(msg), port);
-                replySocket.send(replyPacket);
+                socket.send(replyPacket);
                 
             }
             
