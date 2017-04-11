@@ -1,0 +1,5 @@
+Aplicaciones
+	xampp - tiene el apache (Server)
+	codeigniter
+		la carpeta va en C:\xampp\htdocs
+	postman
