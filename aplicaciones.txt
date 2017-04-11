@@ -1,5 +1,7 @@
 Aplicaciones
-	xampp - tiene el apache (Server)
-	codeigniter
-		la carpeta va en C:\xampp\htdocs
+	installar xampp - tiene el apache (Server)
+	codeigniter:
+		descomprimir carpeta webservice
+		mover carpeta webservice a C:\xampp\htdocs
 	postman
+		instalar para hacer pruebas visuales
