@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ResoruceUpdate;
+package ResourceUpdate;
 
 import FileTransfer.CRemoteServiceIMP;
 import Global.CGlobals;

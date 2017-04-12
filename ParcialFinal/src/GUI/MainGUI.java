@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package GUI;
+import ResourceUpdate.Updater;
 import FileTransfer.CFileService;
 import Global.CGlobals;
-import ResoruceUpdate.*;
 /**
  *
  * @author gamaa_000
