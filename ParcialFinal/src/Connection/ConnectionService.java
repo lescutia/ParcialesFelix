@@ -42,13 +42,14 @@ public class ConnectionService
     {
         try
         {
-            String msg = InetAddress.getLocalHost().getHostAddress();
+            String msg = CGlobals.m_strLocalHost;
             InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
+            InetAddress local = InetAddress.getByName( msg );
             byte[] data = msg.getBytes();
-            MulticastSocket socket = new MulticastSocket( CGlobals.m_iPortLeaderListener );
-            socket.joinGroup(group);
-            DatagramPacket datagram = new DatagramPacket( data, data.length, group, CGlobals.m_iPortLeaderListener );
-            
+            DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener, local );
+            DatagramPacket datagram = new DatagramPacket( data, data.length, InetAddress.getByName( "192.168.3.35" ), CGlobals.m_iPortLeaderListener );
+            System.out.println("Connected at: "+socket.getLocalAddress());
+            DatagramSocket receiverSocket = new DatagramSocket( CGlobals.m_iPortLeaderListener+1 );
             if ( CGlobals.m_bDebugConnection )
             {
                 System.out.println( "[Node]: Looking for system leader" );
@@ -60,10 +61,10 @@ public class ConnectionService
                 try
                 {
                     socket.send( datagram );
-                    socket.setSoTimeout(CGlobals.m_iTimeOutLeaderSearch );
+                    receiverSocket.setSoTimeout(CGlobals.m_iTimeOutLeaderSearch );
                     data = new byte[1024];
                     DatagramPacket packet = new DatagramPacket( data, data.length );
-                    socket.receive( packet );
+                    receiverSocket.receive( packet );
                     String remoteIP = packet.getAddress().toString();
                     remoteIP = remoteIP.replace( "/", "" );
                     if( CGlobals.m_bDebugConnection )
@@ -79,7 +80,7 @@ public class ConnectionService
                 m_iTryAttempt++;
             }
             socket.close();
-
+            receiverSocket.close();
         } 
         catch(UnknownHostException uhe)
         {
