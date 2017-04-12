@@ -32,7 +32,7 @@ public class ConnectionService {
                 System.out.println("[ConnectionService]: Request received: "+msg);
                 String replyMsg = InetAddress.getLocalHost().toString();
                 data = replyMsg.getBytes();
-                DatagramPacket replyPacket = new DatagramPacket(data, data.length, InetAddress.getByName(msg), port);
+                DatagramPacket replyPacket = new DatagramPacket(data, data.length, InetAddress.getByName(msg), port+1);
                 socket.send(replyPacket);
                 
             }
