@@ -47,7 +47,7 @@ public class ConnectionService
             InetAddress local = InetAddress.getByName( msg );
             byte[] data = msg.getBytes();
             DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener, local );
-            DatagramPacket datagram = new DatagramPacket( data, data.length, InetAddress.getByName( "192.168.3.35" ), CGlobals.m_iPortLeaderListener );
+            DatagramPacket datagram = new DatagramPacket( data, data.length, group , CGlobals.m_iPortLeaderListener );
             System.out.println("Connected at: "+socket.getLocalAddress());
             DatagramSocket receiverSocket = new DatagramSocket( CGlobals.m_iPortLeaderListener+1 );
             if ( CGlobals.m_bDebugConnection )

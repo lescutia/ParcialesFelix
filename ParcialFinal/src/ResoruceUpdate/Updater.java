@@ -12,7 +12,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 import java.net.MalformedURLException;
-
+import java.util.ArrayList;
+import java.io.File;
+import java.rmi.NotBoundException;
 /**
  *
  * @author gamaa
@@ -45,6 +47,46 @@ public class Updater {
         catch(MalformedURLException e){
             e.getStackTrace();
         }
+    }
+    
+    public void sendTable(){
+        try
+        {
+
+            if ( System.getSecurityManager() == null )
+            {
+                System.setProperty( "java.security.policy", "security.policy" );
+            }
+
+            Registry registry = LocateRegistry.getRegistry( CGlobals.m_strLeaderId );
+            ResourceUpdate ru = null;
+            ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
+            ArrayList<String> fileList = getFileList();
+            ru.update(CGlobals.m_strLocalHost, fileList);
+            
+        } catch ( RemoteException e )
+        {
+            System.out.println( "[CFileService]: Valio verga" );
+            e.printStackTrace();
+        }
+        catch(MalformedURLException e ){
+            e.printStackTrace();
+        }
+        catch(NotBoundException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public ArrayList<String> getFileList(){
+        File folder = new File(CGlobals.m_strSharedDirPath);
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> resources = new ArrayList<String>();
+        for (File element: listOfFiles) {
+            if (element.isFile()) {
+                    resources.add(element.getName());
+            }
+        }
+        return resources;
     }
     
 }

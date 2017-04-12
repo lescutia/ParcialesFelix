@@ -23,4 +23,9 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
             System.out.println(element);
         }
     } 
+    @Override
+    public ArrayList<ArrayList<String>> getTable() throws RemoteException{
+        
+        return null;
+    }
 }

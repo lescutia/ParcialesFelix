@@ -6,7 +6,7 @@
 package GUI;
 import FileTransfer.CFileService;
 import Global.CGlobals;
-import Connection.*;
+import ResoruceUpdate.*;
 /**
  *
  * @author gamaa_000
@@ -117,8 +117,11 @@ public class MainGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_downloadActionPerformed
         //CFileService client = new CFileService();
         //client.downloadFile("naive.pdf","10.0.5.168");
-        Connection.ConnectionService cs = new Connection.ConnectionService();
-        cs.findLeader();
+        //Connection.ConnectionService cs = new Connection.ConnectionService();
+        //cs.findLeader();
+        Updater u = new Updater();
+        u.sendTable();
+        
     }//GEN-LAST:event_downloadActionPerformed
     
     static SettingsGUI settingsGUI;

@@ -26,7 +26,7 @@ public class CGlobals
 			Network Variables
     ********************************************************/
     /*< ID of the group to which the multicast will be sent. */
-    public static String m_strGroupId   = "224.0.0.3";
+    public static String m_strGroupId   = "224.0.0.5";
     /*< ID of the leader of the group. */
     public static String m_strLeaderId  = "";
     /*< Local host IP address. */
