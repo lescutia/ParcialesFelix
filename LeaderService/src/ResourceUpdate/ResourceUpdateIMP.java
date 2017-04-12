@@ -47,7 +47,7 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         try{
             LocateRegistry.createRegistry( 1500 );
             ResourceUpdateIMP rsIMPObj = new ResourceUpdateIMP();
-            Naming.rebind( "//localhost:" + 1500 + "/UpdateServer", rsIMPObj );
+            Naming.rebind( "//192.168.3.35:1500/UpdateServer", rsIMPObj );
             System.out.println("UpdateServer ready");
         }
         catch(RemoteException e){
