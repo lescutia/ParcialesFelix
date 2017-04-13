@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Main;
 
 import FileTransfer.CFileService;
 import Connection.ConnectionService;
@@ -49,8 +49,7 @@ public class SettingsGUI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         login = new javax.swing.JButton();
         sharedDir = new javax.swing.JButton();
@@ -62,28 +61,22 @@ public class SettingsGUI extends javax.swing.JFrame
 
         login.setText("Log In");
         login.setEnabled(false);
-        login.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginActionPerformed(evt);
             }
         });
 
         sharedDir.setText("Shared Directory");
-        sharedDir.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        sharedDir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sharedDirActionPerformed(evt);
             }
         });
 
         downloadDir.setText("Download Directory");
-        downloadDir.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        downloadDir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downloadDirActionPerformed(evt);
             }
         });
@@ -118,10 +111,12 @@ public class SettingsGUI extends javax.swing.JFrame
     private void loginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_loginActionPerformed
     {//GEN-HEADEREND:event_loginActionPerformed
         CGlobals.saveConfig();
+        //Here is where the login process takes place, 
+        //if the login is successful then next lines are executed
         m_cachedDownloadBtn.setEnabled( true );
         m_cachedSharedBtn.setEnabled( true );
-        CFileService test = new CFileService();
-        test.startFileService();
+        CFileService fileService = new CFileService();
+        fileService.startFileService();
         //TODO: check if it could connect to the leader.
         this.dispose();//not yet, after connection
         

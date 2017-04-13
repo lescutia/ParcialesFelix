@@ -26,16 +26,17 @@ public class ConnectionService
         m_iTryAttempt = 0;
     }
     
-    public void findLeader()
+    public Thread findLeader()
     {
-        new Thread (new Runnable()
+        Thread thread = new Thread (new Runnable()
         {
             @Override
             public void run()
             {
                 findLeaderExecution();
             }
-        }).start();
+        });
+        return thread;
     }
     
     void findLeaderExecution()

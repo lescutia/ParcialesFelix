@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ResourceUpdate;
+import Global.CGlobals;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.server.UnicastRemoteObject;
@@ -21,7 +22,7 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
     
     @Override
     public void update(String owner, ArrayList<String> list) throws RemoteException{
-        System.out.println("Elements in "+owner);
+        System.out.println("[ResourceUpdate]: Elements in "+owner);
         for(String element : list){
             System.out.println(element);
         }
@@ -35,26 +36,35 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
     public static void main(String args[]){
         try{
             ResourceUpdateIMP r = new ResourceUpdateIMP();
-            r.startServerDaemon();
+            //r.startServerDaemon();
         }
         catch(RemoteException e){
             e.printStackTrace();
         }
     }
-    public void startServerDaemon(){
-        if ( System.getSecurityManager() == null )
-            System.setProperty( "java.security.policy", "security.policy" );
-        try{
-            LocateRegistry.createRegistry( 1500 );
-            ResourceUpdateIMP rsIMPObj = new ResourceUpdateIMP();
-            Naming.rebind( "//192.168.3.35:1500/UpdateServer", rsIMPObj );
-            System.out.println("UpdateServer ready");
-        }
-        catch(RemoteException e){
-            e.getStackTrace();
-        }
-        catch(MalformedURLException e){
-            e.getStackTrace();
-        }
+    public Thread ServerDaemon(){
+        
+        Thread thread = new Thread (new Runnable(){
+            @Override
+            public void run(){
+                if ( System.getSecurityManager() == null )
+                    System.setProperty( "java.security.policy", "security.policy" );
+                try{
+                    LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
+                    ResourceUpdateIMP rsIMPObj = new ResourceUpdateIMP();
+                    Naming.rebind( "//"+CGlobals.m_strLocalHost+":"+CGlobals.m_iRemoteObjectPort+"/UpdateServer", rsIMPObj );
+                    System.out.println("[ResourceUpdate]: UpdateServer ready");
+                }
+                catch(RemoteException e){
+                    e.getStackTrace();
+                }
+                catch(MalformedURLException e){
+                    e.getStackTrace();
+                }
+            }
+        });
+        
+        return thread;      
+        
     }
 }

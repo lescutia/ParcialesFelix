@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Main;
 import ResourceUpdate.Updater;
 import FileTransfer.CFileService;
 import Global.CGlobals;
@@ -29,8 +29,7 @@ public class MainGUI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
         download = new javax.swing.JButton();
@@ -56,10 +55,8 @@ public class MainGUI extends javax.swing.JFrame
         download.setText("Download");
         download.setEnabled(false);
         download.setName("Download"); // NOI18N
-        download.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        download.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downloadActionPerformed(evt);
             }
         });
@@ -76,10 +73,8 @@ public class MainGUI extends javax.swing.JFrame
 
         settings.setText("Settings");
         settings.setName("settings"); // NOI18N
-        settings.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        settings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 settingsActionPerformed(evt);
             }
         });
@@ -164,8 +159,9 @@ public class MainGUI extends javax.swing.JFrame
 	    java.util.logging.Logger.getLogger(MainGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 	}
 	//</editor-fold>
-
-	/* Create and display the form */
+        
+	
+        /* Create and display the form */
 	java.awt.EventQueue.invokeLater(new Runnable() 
         {
 	    public void run() 
