@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ConnectionService;
+import Global.CGlobals;
 import java.net.*;
 import java.io.IOException;
 /**
@@ -12,45 +13,55 @@ import java.io.IOException;
  */
 
 public class ConnectionService {
-    public void ConnectionService( int port ){
-        try{
-            
-            InetAddress group = InetAddress.getByName("224.0.0.5");
-            MulticastSocket socket = new MulticastSocket(port);
-            socket.joinGroup(group);
-            byte [] data = new byte[1024];
-            String msg;
-            System.out.println("[ConnectionService]: Listening for new nodes...");
-            
-            while(true){
-                
-                DatagramPacket packet = new DatagramPacket(data,data.length);
-                socket.receive(packet);
-                System.out.println("Received!");
-                msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
-                
-                System.out.println("[ConnectionService]: Request received: "+msg);
-                String replyMsg = InetAddress.getLocalHost().toString();
-                data = replyMsg.getBytes();
-                DatagramPacket replyPacket = new DatagramPacket(data, data.length, InetAddress.getByName(msg), port+1);
-                socket.send(replyPacket);
-                
+    public Thread ConnectionService( ){
+        
+        Thread thread = new Thread (new Runnable(){
+            @Override
+            public void run(){
+                try{
+
+                    InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId);
+                    MulticastSocket socket = new MulticastSocket(CGlobals.m_iPortLeaderListener);
+                    socket.joinGroup(group);
+                    byte [] data = new byte[1024];
+                    String msg;
+                    System.out.println("[ConnectionService]: Listening for new nodes...");
+
+                    while(true){
+
+                        DatagramPacket packet = new DatagramPacket(data,data.length);
+                        socket.receive(packet);
+                        System.out.println("Received!");
+                        msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
+
+                        System.out.println("[ConnectionService]: Request received: "+msg);
+                        String replyMsg = InetAddress.getLocalHost().toString();
+                        data = replyMsg.getBytes();
+                        DatagramPacket replyPacket = new DatagramPacket(data, data.length, InetAddress.getByName(msg), CGlobals.m_iPortLeaderListener+1);
+                        socket.send(replyPacket);
+
+                    }
+
+                }
+                catch(SocketException e){
+                        e.printStackTrace();
+                }		
+                catch(UnknownHostException e){
+                        e.printStackTrace();
+                }	
+                catch(IOException e){
+                        e.printStackTrace();
+                }
             }
             
-        }
-        catch(SocketException e){
-                e.printStackTrace();
-        }		
-        catch(UnknownHostException e){
-                e.printStackTrace();
-        }	
-        catch(IOException e){
-                e.printStackTrace();
-        }
+
+        
+        });
+        return thread;
     }
     
     public static void main(String args[]){
         ConnectionService cs = new ConnectionService();
-        cs.ConnectionService(10000);
+        cs.ConnectionService();
     }
 }
