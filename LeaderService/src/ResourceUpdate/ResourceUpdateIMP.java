@@ -16,22 +16,42 @@ import java.rmi.registry.LocateRegistry;
  * @author gamaa
  */
 public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUpdate{
+    
+    private ArrayList<ArrayList<String>> table;
+    
     public ResourceUpdateIMP() throws RemoteException
     {
+        table = new ArrayList<ArrayList<String>>();
     }
     
     @Override
     public void update(String owner, ArrayList<String> list) throws RemoteException{
-        System.out.println("[ResourceUpdate]: Elements in "+owner);
+        ArrayList<String> tmp = new ArrayList<String>();
+        tmp.add(owner);
+        System.out.println("\n[ResourceUpdate]: Elements in "+owner);
         for(String element : list){
-            System.out.println(element);
+            System.out.println("\t-> "+element);
+            tmp.add(element);
         }
+        int i = findIndex(owner);
+        if( i==-1 )
+            table.add(tmp);
+        else
+            table.add(i, tmp);
     } 
     @Override
     public ArrayList<ArrayList<String>> getTable() throws RemoteException{
-        
-        return null;
+        return table;
     }
+    
+    int findIndex(String owner){
+        for(ArrayList<String> element: table){
+            if(element.get(0).equals(owner))
+                return table.indexOf(element);
+        }
+        return -1;
+    }
+    
     
     public static void main(String args[]){
         try{
