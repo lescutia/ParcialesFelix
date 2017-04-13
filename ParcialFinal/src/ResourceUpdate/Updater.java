@@ -49,14 +49,38 @@ public class Updater {
         }
     }
     
+    public ArrayList<ArrayList<String>> getResourceTable(){
+        try
+        {
+
+            if ( System.getSecurityManager() == null )
+                System.setProperty( "java.security.policy", "security.policy" );
+
+            Registry registry = LocateRegistry.getRegistry( CGlobals.m_strLeaderId );
+            ResourceUpdate ru = null;
+            ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
+            return ru.getTable();
+            
+        } catch ( RemoteException e )
+        {
+            System.out.println( "[Updater/getResourceTable]: RemoteException" );
+            e.printStackTrace();
+        }
+        catch(MalformedURLException e ){
+            e.printStackTrace();
+        }
+        catch(NotBoundException e){
+            e.printStackTrace();
+        }
+        return new ArrayList<ArrayList<String>>();
+    }
+    
     public void sendTable(){
         try
         {
 
             if ( System.getSecurityManager() == null )
-            {
                 System.setProperty( "java.security.policy", "security.policy" );
-            }
 
             Registry registry = LocateRegistry.getRegistry( CGlobals.m_strLeaderId );
             ResourceUpdate ru = null;
@@ -66,7 +90,7 @@ public class Updater {
             
         } catch ( RemoteException e )
         {
-            System.out.println( "[CFileService]: Valio verga" );
+            System.out.println( "[Updater/sendTable]: RemoteException" );
             e.printStackTrace();
         }
         catch(MalformedURLException e ){

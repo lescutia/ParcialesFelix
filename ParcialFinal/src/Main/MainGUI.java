@@ -70,6 +70,11 @@ public class MainGUI extends javax.swing.JFrame
         refresh.setText("Refresh");
         refresh.setEnabled(false);
         refresh.setName("refresh"); // NOI18N
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshActionPerformed(evt);
+            }
+        });
 
         settings.setText("Settings");
         settings.setName("settings"); // NOI18N
@@ -112,8 +117,7 @@ public class MainGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_downloadActionPerformed
         //CFileService client = new CFileService();
         //client.downloadFile("naive.pdf","10.0.5.168");
-        //Connection.ConnectionService cs = new Connection.ConnectionService();
-        //cs.findLeader();
+        
         Updater u = new Updater();
         u.sendTable();
         
@@ -131,6 +135,11 @@ public class MainGUI extends javax.swing.JFrame
         else
             settingsGUI.setVisible( true );
     }//GEN-LAST:event_settingsActionPerformed
+
+    private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_refreshActionPerformed
 
     /**
      * @param args the command line arguments
