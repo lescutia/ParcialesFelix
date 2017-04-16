@@ -30,14 +30,14 @@ public class MainGUI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jFrame1 = new javax.swing.JFrame();
         download = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
         refresh = new javax.swing.JButton();
-        settings = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -54,32 +54,28 @@ public class MainGUI extends javax.swing.JFrame
         setResizable(false);
 
         download.setText("Download");
-        download.setEnabled(false);
         download.setName("Download"); // NOI18N
-        download.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        download.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 downloadActionPerformed(evt);
             }
         });
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setRootVisible(false);
         jTree1.setSelectionModel(null);
         jScrollPane1.setViewportView(jTree1);
 
         refresh.setText("Refresh");
-        refresh.setEnabled(false);
         refresh.setName("refresh"); // NOI18N
-        refresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        refresh.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 refreshActionPerformed(evt);
-            }
-        });
-
-        settings.setText("Settings");
-        settings.setName("settings"); // NOI18N
-        settings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsActionPerformed(evt);
             }
         });
 
@@ -92,12 +88,9 @@ public class MainGUI extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(download)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refresh)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(settings)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(download, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,8 +101,7 @@ public class MainGUI extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(download)
-                    .addComponent(refresh)
-                    .addComponent(settings))
+                    .addComponent(refresh))
                 .addContainerGap())
         );
 
@@ -126,19 +118,6 @@ public class MainGUI extends javax.swing.JFrame
         
     }//GEN-LAST:event_downloadActionPerformed
     
-    static SettingsGUI settingsGUI;
-    private void settingsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_settingsActionPerformed
-    {//GEN-HEADEREND:event_settingsActionPerformed
-        CGlobals.loadConfig();
-        if( settingsGUI == null )
-        {
-            settingsGUI = new SettingsGUI( download, refresh );
-            settingsGUI.setVisible( true );
-        }
-        else
-            settingsGUI.setVisible( true );
-    }//GEN-LAST:event_settingsActionPerformed
-
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         // TODO add your handling code here:
         Updater u = new Updater();
@@ -201,6 +180,5 @@ public class MainGUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree jTree1;
     private javax.swing.JButton refresh;
-    private javax.swing.JButton settings;
     // End of variables declaration//GEN-END:variables
 }

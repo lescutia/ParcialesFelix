@@ -46,12 +46,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="download" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="refresh" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="settings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="download" pref="120" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="refresh" min="-2" pref="118" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -67,7 +64,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="download" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="refresh" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="settings" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -78,7 +74,6 @@
     <Component class="javax.swing.JButton" name="download">
       <Properties>
         <Property name="text" type="java.lang.String" value="Download"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="Download" noResource="true"/>
       </Properties>
       <Events>
@@ -94,6 +89,9 @@
       <SubComponents>
         <Component class="javax.swing.JTree" name="jTree1">
           <Properties>
+            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
+              <TreeModel code=""/>
+            </Property>
             <Property name="rootVisible" type="boolean" value="false"/>
             <Property name="selectionModel" type="javax.swing.tree.TreeSelectionModel" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="null"/>
@@ -105,20 +103,10 @@
     <Component class="javax.swing.JButton" name="refresh">
       <Properties>
         <Property name="text" type="java.lang.String" value="Refresh"/>
-        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="refresh" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="settings">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Settings"/>
-        <Property name="name" type="java.lang.String" value="settings" noResource="true"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

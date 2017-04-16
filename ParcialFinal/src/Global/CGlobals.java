@@ -11,6 +11,7 @@ package Global;
 import java.io.*;
 //import java.lang.System.*;
 import java.util.Scanner;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class CGlobals 
 {
@@ -47,7 +48,7 @@ public class CGlobals
     ********************************************************/
     public static String m_strDownloadPath = "";
     public static String m_strSharedDirPath = "";
-    
+
     public static void saveConfig()
     {
         try
@@ -82,4 +83,12 @@ public class CGlobals
         catch( IOException e ) {}
     }
     
+    private static int m_iWorkload = 12;
+    public static String hashPassword( String password_plaintext )
+    {
+        String salt = BCrypt.gensalt( m_iWorkload );
+        String hashed_password = BCrypt.hashpw( password_plaintext, salt );
+
+        return (hashed_password);
+    }
 }
