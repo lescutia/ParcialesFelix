@@ -24,7 +24,7 @@ import java.io.IOException;
 public class FileListener
 {
 
-    public Thread executeThread( )
+    public Thread fileListenerThread( )
     {
         String path = CGlobals.m_strSharedDirPath;
         Thread thread = new Thread( new Runnable()
@@ -42,7 +42,6 @@ public class FileListener
                 }
             }
         } );
-        thread.start();
         return thread;
     }
 

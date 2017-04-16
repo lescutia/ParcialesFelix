@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Main;
+import FileTransfer.CFileService;
 import ResourceUpdate.Updater;
 import java.util.ArrayList;
 import Global.CGlobals;
@@ -22,8 +23,6 @@ public class MainGUI extends javax.swing.JFrame
     {
         initComponents();
         jTree1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        Updater u = new Updater();
-        u.sendTable();
     }
 
     /**
@@ -107,8 +106,15 @@ public class MainGUI extends javax.swing.JFrame
 
     private void downloadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_downloadActionPerformed
     {//GEN-HEADEREND:event_downloadActionPerformed
-        //CFileService client = new CFileService();
-        //client.downloadFile("naive.pdf","10.0.5.168");
+        TreePath currentSelection = jTree1.getSelectionPath();
+        if (currentSelection != null)
+        {
+          String owner    = currentSelection.getParentPath().getLastPathComponent().toString();
+          String fileName = currentSelection.getLastPathComponent().toString();
+          String path     = CGlobals.m_strDownloadPath;
+          CFileService fs = new CFileService();
+          fs.downloadFile(fileName, owner);
+        }
         
     }//GEN-LAST:event_downloadActionPerformed
     
@@ -164,7 +170,7 @@ public class MainGUI extends javax.swing.JFrame
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
         for(ArrayList<String> element : table){
             DefaultMutableTreeNode tmp = new DefaultMutableTreeNode(element.get(0));
-            for (String file : element){
+            for (String file : element.subList(1, element.size())){
                 DefaultMutableTreeNode fileNode = new DefaultMutableTreeNode(file);
                 tmp.add(fileNode);
             }

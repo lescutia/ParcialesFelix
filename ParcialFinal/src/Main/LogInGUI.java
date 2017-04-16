@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 import Global.CGlobals;
 import javax.swing.JButton;
 import Connection.*;
+import Global.CThreadManager;
 import ResourceUpdate.ResourceUpdate;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -19,6 +20,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
+import ResourceUpdate.*;
 
 /**
  *
@@ -187,8 +189,11 @@ public class LogInGUI extends javax.swing.JFrame
             if( ru.checkUser( username, password ) )
             {
                 m_cachedMainGUI.setVisible( true );
+                CThreadManager.startThread( new FileListener().fileListenerThread(), "FileListener");
                 CFileService fileService = new CFileService();
                 fileService.startFileService();
+                Updater u = new Updater();
+                u.sendTable();
                 this.dispose();
             }
             else

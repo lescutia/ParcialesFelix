@@ -10,6 +10,7 @@ import FileTransfer.*;
 import Global.*;
 import ResourceUpdate.*;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,16 @@ import java.rmi.RemoteException;
  */
 public class MainManager
 {
-
+    static ArrayList<Thread> m_lstThreads = new ArrayList<>();;
+    
+    public static void StartThread( Thread in_thread, String in_strThreadName )
+    {
+        in_thread.setName( in_strThreadName );
+        m_lstThreads.add( in_thread );
+        in_thread.start();
+    }
+    
+    
     public static void main( String args[] )
     {
         CGlobals.loadConfig();
@@ -25,40 +35,31 @@ public class MainManager
         LeaderSearchGUI lsGUI = new LeaderSearchGUI();
         lsGUI.setVisible( true );
 
-        try
+        CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
+        CThreadManager.waitForThread( "findLeader" );
+        lsGUI.dispose();
+        if ( CGlobals.m_strLeaderId.equals( "" ) )
         {
-            ConnectionService cs = new ConnectionService();
-            Thread findLeader = cs.findLeader();
-            findLeader.start();
-            findLeader.join();
-            lsGUI.dispose();
-            if ( CGlobals.m_strLeaderId.equals( "" ) )
-            {
-                System.out.println( "[Manager]: No leader found" );
-                LeaderAlertGUI alert = new LeaderAlertGUI();
-                alert.setVisible( true );
-            }
-            else
-            {
-                try
-                {
-                    Thread checker = new RMIUtils().ResourceUpdateChecker();
-                    checker.start();
-                }
-                catch ( RemoteException e )
-                {
-                    System.out.println( "RemoteException!!" );
-                }
-                MainGUI mainGUI = new MainGUI();
-                LogInGUI loginGUI = new LogInGUI( mainGUI );
-                loginGUI.setVisible( true );
-                //MainGUI mainGUI = new MainGUI();
-                //mainGUI.setVisible(true);
-            }
+            System.out.println( "[Manager]: No leader found" );
+            LeaderAlertGUI alert = new LeaderAlertGUI();
+            alert.setVisible( true );
         }
-        catch ( InterruptedException e )
+        else
         {
-            e.printStackTrace();
+            try
+            {
+                Thread checker = new RMIUtils().ResourceUpdateChecker();
+                checker.start();
+            }
+            catch ( RemoteException e )
+            {
+                System.out.println( "RemoteException!!" );
+            }
+            MainGUI mainGUI = new MainGUI();
+            LogInGUI loginGUI = new LogInGUI( mainGUI );
+            loginGUI.setVisible( true );
+            //MainGUI mainGUI = new MainGUI();
+            //mainGUI.setVisible(true);
         }
     }
 

@@ -24,12 +24,11 @@ public class CFileService
     {
 
     }
-
+    
     public void startFileService()
     {
         try
         {
-
             if ( System.getSecurityManager() == null )
                 System.setProperty( "java.security.policy", "security.policy" );
             
@@ -40,10 +39,10 @@ public class CFileService
 
         } catch ( RemoteException e )
         {
-            System.out.println( "[CFileService]: Valio verga" );
             e.printStackTrace();
         }
-        catch(MalformedURLException e ){
+        catch(MalformedURLException e )
+        {
             e.getStackTrace();
         }
     }
@@ -67,7 +66,6 @@ public class CFileService
             
         } catch ( RemoteException e )
         {
-            System.out.println( "[CFileService]: Valio verga" );
             e.printStackTrace();
         }
         catch(MalformedURLException e ){

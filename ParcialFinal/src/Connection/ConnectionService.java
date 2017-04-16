@@ -26,7 +26,7 @@ public class ConnectionService
         m_iTryAttempt = 0;
     }
     
-    public Thread findLeader()
+    public Thread findLeaderThread()
     {
         Thread thread = new Thread (new Runnable()
         {
