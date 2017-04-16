@@ -36,8 +36,10 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         int i = findIndex(owner);
         if( i==-1 )
             table.add(tmp);
-        else
+        else{
+            table.remove(i);
             table.add(i, tmp);
+        }
     } 
     @Override
     public ArrayList<ArrayList<String>> getTable() throws RemoteException{
