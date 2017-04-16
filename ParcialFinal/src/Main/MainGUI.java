@@ -21,6 +21,7 @@ public class MainGUI extends javax.swing.JFrame
     public MainGUI()
     {
         initComponents();
+        jTree1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
 
     /**
@@ -30,8 +31,7 @@ public class MainGUI extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
         download = new javax.swing.JButton();
@@ -55,10 +55,8 @@ public class MainGUI extends javax.swing.JFrame
 
         download.setText("Download");
         download.setName("Download"); // NOI18N
-        download.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        download.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 downloadActionPerformed(evt);
             }
         });
@@ -66,15 +64,12 @@ public class MainGUI extends javax.swing.JFrame
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setRootVisible(false);
-        jTree1.setSelectionModel(null);
         jScrollPane1.setViewportView(jTree1);
 
         refresh.setText("Refresh");
         refresh.setName("refresh"); // NOI18N
-        refresh.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshActionPerformed(evt);
             }
         });
@@ -123,15 +118,7 @@ public class MainGUI extends javax.swing.JFrame
         Updater u = new Updater();
         ArrayList<ArrayList<String>> table = u.getResourceTable();
         
-        for(ArrayList<String> element: table){
-            String owner = element.get(0);
-            System.out.println("Elements in "+owner);
-            for(String resource : element){
-                System.out.println("\t-> "+resource);
-            }
-            DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(owner);
-            
-        }
+        populateTree(table);
         
     }//GEN-LAST:event_refreshActionPerformed
 
@@ -172,6 +159,20 @@ public class MainGUI extends javax.swing.JFrame
 		new MainGUI().setVisible(true);
 	    }
 	});
+    }
+    
+    public void populateTree(ArrayList<ArrayList<String>> table){
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
+        for(ArrayList<String> element : table){
+            DefaultMutableTreeNode tmp = new DefaultMutableTreeNode(element.get(0));
+            for (String file : element){
+                DefaultMutableTreeNode fileNode = new DefaultMutableTreeNode(file);
+                tmp.add(fileNode);
+            }
+            root.add(tmp);
+        }
+        DefaultTreeModel model = new DefaultTreeModel(root);
+        jTree1.setModel(model);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
