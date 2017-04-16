@@ -5,15 +5,16 @@
  */
 package Main;
 import ResourceUpdate.Updater;
-import FileTransfer.CFileService;
+import java.util.ArrayList;
 import Global.CGlobals;
+import javax.swing.tree.*;
+import javax.swing.JTree;
 /**
  *
  * @author gamaa_000
  */
 public class MainGUI extends javax.swing.JFrame
 {
-
     /**
      * Creates new form MainGUI
      */
@@ -61,8 +62,6 @@ public class MainGUI extends javax.swing.JFrame
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setRootVisible(false);
         jTree1.setSelectionModel(null);
         jScrollPane1.setViewportView(jTree1);
@@ -90,18 +89,22 @@ public class MainGUI extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(download)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refresh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(settings)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(download)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refresh)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(settings)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(download)
@@ -138,6 +141,18 @@ public class MainGUI extends javax.swing.JFrame
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
         // TODO add your handling code here:
+        Updater u = new Updater();
+        ArrayList<ArrayList<String>> table = u.getResourceTable();
+        
+        for(ArrayList<String> element: table){
+            String owner = element.get(0);
+            System.out.println("Elements in "+owner);
+            for(String resource : element){
+                System.out.println("\t-> "+resource);
+            }
+            DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(owner);
+            
+        }
         
     }//GEN-LAST:event_refreshActionPerformed
 

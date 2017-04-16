@@ -8,6 +8,7 @@ import Connection.*;
 import FileTransfer.*;
 import Global.*;
 import ResourceUpdate.*;
+import java.rmi.RemoteException;
 /**
  *
  * @author gamaa
@@ -33,17 +34,18 @@ public class MainManager {
             }                
             else
             {
+                try{
+                    Thread checker = new RMIUtils().ResourceUpdateChecker();
+                    checker.start();
+                }
+                catch(RemoteException e){
+                    System.out.println("RemoteException!!");
+                }
                 MainGUI mainGUI = new MainGUI();
                 mainGUI.setVisible(true);
             }
         }
         catch(InterruptedException e){e.printStackTrace();}
-        
-    }
-    public void startLeaderSearch(){
-        
-    }
-    public void startFileService(){
         
     }
     
