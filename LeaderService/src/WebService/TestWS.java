@@ -7,6 +7,7 @@ package WebService;
 
 //import ClientWS.WSTest;
 //import ClientWS.WSTest_Service;
+import Global.HttpConnection;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.*;

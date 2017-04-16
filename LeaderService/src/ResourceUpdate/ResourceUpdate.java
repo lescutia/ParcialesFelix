@@ -11,11 +11,12 @@ import java.util.ArrayList;
  *
  * @author gamaa
  */
-public interface ResourceUpdate extends Remote{
-    
+public interface ResourceUpdate extends Remote
+{    
     /*
     *   @Param fileList is the list of available resources.
     */
     public void update(String owner, ArrayList<String> fileList) throws RemoteException;
     public ArrayList<ArrayList<String>> getTable() throws RemoteException;
+    public boolean checkUser( String in_user, String in_pass ) throws RemoteException;
 }
