@@ -22,6 +22,8 @@ public class MainGUI extends javax.swing.JFrame
     {
         initComponents();
         jTree1.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        Updater u = new Updater();
+        u.sendTable();
     }
 
     /**
@@ -107,9 +109,6 @@ public class MainGUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_downloadActionPerformed
         //CFileService client = new CFileService();
         //client.downloadFile("naive.pdf","10.0.5.168");
-        
-        Updater u = new Updater();
-        u.sendTable();
         
     }//GEN-LAST:event_downloadActionPerformed
     
