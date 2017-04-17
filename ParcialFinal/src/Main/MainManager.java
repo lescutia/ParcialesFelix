@@ -31,6 +31,8 @@ public class MainManager
         startApplication( true );
     }
     
+    static Thread m_RMIUtilsThread;
+    
     public static void startApplication( boolean in_bFirstTime )
     {
         CGUIManager.display( "LeaderSearch" );
@@ -49,8 +51,10 @@ public class MainManager
         {
             try
             {
-                Thread checker = new RMIUtils().ResourceUpdateChecker();
-                checker.start();
+                if( m_RMIUtilsThread == null )
+                    m_RMIUtilsThread = new RMIUtils().ResourceUpdateChecker();
+                if( !m_RMIUtilsThread.isAlive() )
+                    m_RMIUtilsThread.start();
             }
             catch ( RemoteException e )
             {
