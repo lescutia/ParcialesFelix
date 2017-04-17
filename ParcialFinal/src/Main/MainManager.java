@@ -18,31 +18,26 @@ import java.util.ArrayList;
  */
 public class MainManager
 {
-    static ArrayList<Thread> m_lstThreads = new ArrayList<>();;
-    
-    public static void StartThread( Thread in_thread, String in_strThreadName )
-    {
-        in_thread.setName( in_strThreadName );
-        m_lstThreads.add( in_thread );
-        in_thread.start();
-    }
-    
-    
     public static void main( String args[] )
     {
         CGlobals.loadConfig();
         CGlobals.m_strLocalHost = NetworkUtils.getLocalIP();
-        LeaderSearchGUI lsGUI = new LeaderSearchGUI();
-        lsGUI.setVisible( true );
+        CGUIManager.addGUI( new LeaderSearchGUI(), "LeaderSearch" );
+        CGUIManager.addGUI( new LeaderAlertGUI(), "LeaderAlert" );
+        CGUIManager.addGUI( new MainGUI(), "Main" );
+        CGUIManager.addGUI( new LogInGUI(), "LogIn" );
+        
+        CGUIManager.display( "LeaderSearch" );
         
         CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
         CThreadManager.waitForThread( "findLeader" );
-        lsGUI.dispose();
+        
+        CGUIManager.dispose( "LeaderSearch" );
+        
         if ( CGlobals.m_strLeaderId.equals( "" ) )
         {
             System.out.println( "[Manager]: No leader found" );
-            LeaderAlertGUI alert = new LeaderAlertGUI();
-            alert.setVisible( true );
+            CGUIManager.display( "LeaderAlert" );
         }
         else
         {
@@ -55,11 +50,8 @@ public class MainManager
             {
                 System.out.println( "RemoteException!!" );
             }
-            MainGUI mainGUI = new MainGUI();
-            LogInGUI loginGUI = new LogInGUI( mainGUI );
-            loginGUI.setVisible( true );
-            //MainGUI mainGUI = new MainGUI();
-            //mainGUI.setVisible(true);
+            
+            CGUIManager.display( "LogIn" );
         }
     }
 

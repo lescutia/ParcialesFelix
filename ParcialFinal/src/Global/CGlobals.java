@@ -8,6 +8,7 @@
 **************************************************************************/
 
 package Global;
+import Connection.ConnectionService;
 import java.io.*;
 //import java.lang.System.*;
 import java.util.Scanner;
@@ -20,8 +21,9 @@ public class CGlobals
     ********************************************************/
     /*< Flag to active or disable debug mode in class Node. */
     public static boolean m_bDebugConnection	= true;
-    public static boolean m_bDebugExceptions    = true;
-    public static boolean m_bDebugThreadMngr    = true;
+    public static boolean m_bDebugExceptions    = false;
+    public static boolean m_bDebugThreadMngr    = false;
+    public static boolean m_bDebugGUIMngr       = true;
     
     
     /********************************************************
@@ -91,5 +93,10 @@ public class CGlobals
         String hashed_password = BCrypt.hashpw( password_plaintext, salt );
 
         return (hashed_password);
+    }
+    
+    public static void restartService()
+    {
+        CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
     }
 }

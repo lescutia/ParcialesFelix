@@ -6,11 +6,9 @@
 package Main;
 
 import FileTransfer.CFileService;
-import Connection.ConnectionService;
 import javax.swing.JFileChooser;
 import Global.CGlobals;
-import javax.swing.JButton;
-import Connection.*;
+import Global.CGUIManager;
 import Global.CThreadManager;
 import ResourceUpdate.ResourceUpdate;
 import java.net.MalformedURLException;
@@ -19,7 +17,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
 import ResourceUpdate.*;
 
 /**
@@ -28,21 +25,9 @@ import ResourceUpdate.*;
  */
 public class LogInGUI extends javax.swing.JFrame
 {
-    MainGUI m_cachedMainGUI;
-
     /**
      * Creates new form SettingsGUI
      */
-    public LogInGUI( MainGUI in_mainGUI )
-    {
-        initComponents();
-        m_cachedMainGUI = in_mainGUI;
-        if ( !CGlobals.m_strSharedDirPath.equals( "" ) && !CGlobals.m_strDownloadPath.equals( "" ) )
-        {
-            login.setEnabled( true );
-        }
-    }
-
     public LogInGUI()
     {
         initComponents();
@@ -188,17 +173,17 @@ public class LogInGUI extends javax.swing.JFrame
             ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
             if( ru.checkUser( username, password ) )
             {
-                m_cachedMainGUI.setVisible( true );
+                CGUIManager.display( "Main" );
                 CThreadManager.startThread( new FileListener().fileListenerThread(), "FileListener");
                 CFileService fileService = new CFileService();
                 fileService.startFileService();
                 Updater u = new Updater();
                 u.sendTable();
-                this.dispose();
+                CGUIManager.dispose( "LogIn" );
             }
             else
             {
-                System.out.println( "[TODO]: Error window" );
+                CGUIManager.display( "LogInError" );
             }
         }
         catch ( RemoteException e )

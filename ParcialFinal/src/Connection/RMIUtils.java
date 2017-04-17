@@ -5,6 +5,7 @@
  */
 package Connection;
 
+import Global.CGUIManager;
 import ResourceUpdate.ResourceUpdate;
 import Global.CGlobals;
 import Global.CThreadManager;
@@ -50,6 +51,7 @@ public class RMIUtils
                 {
                     System.out.println( "[ResourceUpdateChecker]: Exception " );
                     CThreadManager.stopAllThreads();
+                    CGUIManager.disposeAll();
                     e.printStackTrace();
                 }
                 catch ( MalformedURLException e )
