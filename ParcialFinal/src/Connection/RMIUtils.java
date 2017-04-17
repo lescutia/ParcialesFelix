@@ -7,6 +7,7 @@ package Connection;
 
 import ResourceUpdate.ResourceUpdate;
 import Global.CGlobals;
+import Global.CThreadManager;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -48,6 +49,7 @@ public class RMIUtils
                 catch ( RemoteException e )
                 {
                     System.out.println( "[ResourceUpdateChecker]: Exception " );
+                    CThreadManager.stopAllThreads();
                     e.printStackTrace();
                 }
                 catch ( MalformedURLException e )

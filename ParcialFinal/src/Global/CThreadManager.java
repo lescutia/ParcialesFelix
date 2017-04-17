@@ -26,6 +26,8 @@ public class CThreadManager
             in_thread.setName( in_strThreadName );
             m_mapThreads.put(in_strThreadName, in_thread);
             in_thread.start();
+            if( CGlobals.m_bDebugThreadMngr )
+                System.out.println( "[CThreadManager]: " + in_strThreadName + " Thread started." );
         }
         else if( CGlobals.m_bDebugThreadMngr )
             System.out.println( "[CThreadManager]: Thread " + in_strThreadName + " already exists." );
@@ -39,6 +41,8 @@ public class CThreadManager
             Thread thread = m_mapThreads.get( in_strThreadName );
             thread.interrupt();
             m_mapThreads.remove( in_strThreadName );
+            if( CGlobals.m_bDebugThreadMngr )
+                System.out.println( "[CThreadManager]: " + in_strThreadName + " Thread stoped." );
         }
         else if( CGlobals.m_bDebugThreadMngr )
             System.out.println( "[CThreadManager]: Thread " + in_strThreadName + " doesn't exists." );
@@ -51,10 +55,16 @@ public class CThreadManager
         return null;
     }
     
-    public static void removeThread( String in_strThreadName )
+    public static boolean removeThread( String in_strThreadName )
     {
         if( m_mapThreads.containsKey( in_strThreadName ) )
+        {
             m_mapThreads.remove( in_strThreadName );
+            if( CGlobals.m_bDebugThreadMngr )
+                System.out.println( "[CThreadManager]: " + in_strThreadName + " Thread removed." );
+            return true;
+        }
+        return false;
     }
     
     public static void waitForThread( String in_strThreadName )
@@ -62,6 +72,8 @@ public class CThreadManager
         if( m_mapThreads.containsKey( in_strThreadName ) )
         {
             Thread cachedThread = m_mapThreads.get( in_strThreadName );
+            if( CGlobals.m_bDebugThreadMngr )
+                System.out.println( "[CThreadManager]: Waiting for " + in_strThreadName + " Thread." );
             try{ cachedThread.join(); } catch( InterruptedException ie ){ }
             removeThread( in_strThreadName );
         }
@@ -71,6 +83,8 @@ public class CThreadManager
     {
         m_mapThreads.entrySet().forEach((cachedElement) -> {
             cachedElement.getValue().interrupt();
+            if( CGlobals.m_bDebugThreadMngr )
+                System.out.println( "[CThreadManager]: " + cachedElement.getKey() + " Thread interrupted." );
         });
         m_mapThreads.clear();
     }

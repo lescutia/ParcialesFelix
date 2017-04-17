@@ -34,7 +34,7 @@ public class MainManager
         CGlobals.m_strLocalHost = NetworkUtils.getLocalIP();
         LeaderSearchGUI lsGUI = new LeaderSearchGUI();
         lsGUI.setVisible( true );
-
+        
         CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
         CThreadManager.waitForThread( "findLeader" );
         lsGUI.dispose();
