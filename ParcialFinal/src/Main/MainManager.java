@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class MainManager
 {
+    
     public static void main( String args[] )
     {
         CGlobals.loadConfig();
@@ -27,6 +28,11 @@ public class MainManager
         CGUIManager.addGUI( new MainGUI(), "Main" );
         CGUIManager.addGUI( new LogInGUI(), "LogIn" );
         
+        startApplication( true );
+    }
+    
+    public static void startApplication( boolean in_bFirstTime )
+    {
         CGUIManager.display( "LeaderSearch" );
         
         CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
@@ -51,8 +57,10 @@ public class MainManager
                 System.out.println( "RemoteException!!" );
             }
             
-            CGUIManager.display( "LogIn" );
+            if( in_bFirstTime )
+                CGUIManager.display( "LogIn" );
+            else
+                CGlobals.login();
         }
     }
-
 }

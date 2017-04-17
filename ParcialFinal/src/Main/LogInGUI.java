@@ -158,47 +158,11 @@ public class LogInGUI extends javax.swing.JFrame
         //m_cachedDownloadBtn.setEnabled( true );
         //m_cachedSharedBtn.setEnabled( true );
         String username = usernameField.getText()
-                ,password = CGlobals.hashPassword( String.copyValueOf( passwordField.getPassword() ) ) ;
+                ,password = String.copyValueOf( passwordField.getPassword() );
         
-        try
-        {
-
-            if ( System.getSecurityManager() == null )
-            {
-                System.setProperty( "java.security.policy", "security.policy" );
-            }
-
-            Registry registry = LocateRegistry.getRegistry( CGlobals.m_strLeaderId );
-            ResourceUpdate ru = null;
-            ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
-            if( ru.checkUser( username, password ) )
-            {
-                CGUIManager.display( "Main" );
-                CThreadManager.startThread( new FileListener().fileListenerThread(), "FileListener");
-                CFileService fileService = new CFileService();
-                fileService.startFileService();
-                Updater u = new Updater();
-                u.sendTable();
-                CGUIManager.dispose( "LogIn" );
-            }
-            else
-            {
-                CGUIManager.display( "LogInError" );
-            }
-        }
-        catch ( RemoteException e )
-        {
-            System.out.println( "[Updater/sendTable]: RemoteException" );
-            e.printStackTrace();
-        }
-        catch ( MalformedURLException e )
-        {
-            e.printStackTrace();
-        }
-        catch ( NotBoundException e )
-        {
-            e.printStackTrace();
-        }
+        CGlobals.m_strUsername = username;
+        CGlobals.m_strPassword = password;
+        CGlobals.login();
     }//GEN-LAST:event_loginActionPerformed
 
     private void sharedDirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_sharedDirActionPerformed

@@ -9,8 +9,12 @@
 
 package Global;
 import Connection.ConnectionService;
+import FileTransfer.CFileService;
+import ResourceUpdate.*;
 import java.io.*;
-//import java.lang.System.*;
+import java.net.MalformedURLException;
+import java.rmi.*;
+import java.rmi.registry.*;
 import java.util.Scanner;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -22,8 +26,8 @@ public class CGlobals
     /*< Flag to active or disable debug mode in class Node. */
     public static boolean m_bDebugConnection	= true;
     public static boolean m_bDebugExceptions    = false;
-    public static boolean m_bDebugThreadMngr    = false;
-    public static boolean m_bDebugGUIMngr       = true;
+    public static boolean m_bDebugThreadMngr    = true;
+    public static boolean m_bDebugGUIMngr       = false;
     
     
     /********************************************************
@@ -51,7 +55,9 @@ public class CGlobals
     ********************************************************/
     public static String m_strDownloadPath = "";
     public static String m_strSharedDirPath = "";
-
+    public static String m_strUsername = "";
+    public static String m_strPassword = "";
+    
     public static void saveConfig()
     {
         try
@@ -98,5 +104,48 @@ public class CGlobals
     public static void restartService()
     {
         CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
+    }
+    
+    public static void login( )
+    {
+        try
+        {
+            
+            if ( System.getSecurityManager() == null )
+            {
+                System.setProperty( "java.security.policy", "security.policy" );
+            }
+
+            Registry registry = LocateRegistry.getRegistry( CGlobals.m_strLeaderId );
+            ResourceUpdate ru = null;
+            ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
+            if( ru.checkUser( m_strUsername, hashPassword( m_strPassword ) ) )
+            {
+                CThreadManager.startThread( new FileListener().fileListenerThread(), "FileListener");
+                CFileService fileService = new CFileService();
+                fileService.startFileService();
+                Updater u = new Updater();
+                u.sendTable();
+                CGUIManager.dispose( "LogIn" );
+                CGUIManager.display( "Main" );
+            }
+            else
+            {
+                CGUIManager.display( "LogInError" );
+            }
+        }
+        catch ( RemoteException e )
+        {
+            System.out.println( "[Updater/sendTable]: RemoteException" );
+            e.printStackTrace();
+        }
+        catch ( MalformedURLException e )
+        {
+            e.printStackTrace();
+        }
+        catch ( NotBoundException e )
+        {
+            e.printStackTrace();
+        }
     }
 }
