@@ -16,31 +16,9 @@ import java.util.ArrayList;
 import java.io.File;
 import java.rmi.NotBoundException;
 
-/**
- *
- * @author gamaa
- */
+
 public class Updater
 {
-
-    /*
-    public void startClientDaemon()
-    {
-        try
-        {
-            if ( System.getSecurityManager() == null )
-            {
-                System.setProperty( "java.security.policy", "security.policy" );
-            }
-            Registry registry = LocateRegistry.getRegistry( "" );
-        }
-        catch ( RemoteException e )
-        {
-            e.getStackTrace();
-        }
-    }
-    */
-
     public void startServerDaemon()
     {
         if ( System.getSecurityManager() == null )
