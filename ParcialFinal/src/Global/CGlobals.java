@@ -10,12 +10,14 @@
 package Global;
 import Connection.ConnectionService;
 import FileTransfer.CFileService;
+import Main.LogInGUI;
 import ResourceUpdate.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.registry.*;
 import java.util.Scanner;
+import javax.swing.JFrame;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class CGlobals 
@@ -25,9 +27,9 @@ public class CGlobals
     ********************************************************/
     /*< Flag to active or disable debug mode in class Node. */
     public static boolean m_bDebugConnection	= true;
-    public static boolean m_bDebugExceptions    = false;
+    public static boolean m_bDebugExceptions    = true;
     public static boolean m_bDebugThreadMngr    = true;
-    public static boolean m_bDebugGUIMngr       = false;
+    public static boolean m_bDebugGUIMngr       = true;
     
     
     /********************************************************
@@ -110,7 +112,6 @@ public class CGlobals
     {
         try
         {
-            
             if ( System.getSecurityManager() == null )
             {
                 System.setProperty( "java.security.policy", "security.policy" );
@@ -126,26 +127,20 @@ public class CGlobals
                 fileService.startFileService();
                 Updater u = new Updater();
                 u.sendTable();
-                CGUIManager.dispose( "LogIn" );
+                CGUIManager.hideGUI( "LogIn" );
                 CGUIManager.display( "Main" );
             }
             else
             {
+                LogInGUI tmpGUI = (LogInGUI) CGUIManager.getGUI( "LogIn" );
+                if( tmpGUI != null )
+                    tmpGUI.enableLogInBtn( false );
                 CGUIManager.display( "LogInError" );
             }
         }
-        catch ( RemoteException e )
+        catch ( RemoteException|MalformedURLException|NotBoundException e )
         {
             System.out.println( "[Updater/sendTable]: RemoteException" );
-            e.printStackTrace();
-        }
-        catch ( MalformedURLException e )
-        {
-            e.printStackTrace();
-        }
-        catch ( NotBoundException e )
-        {
-            e.printStackTrace();
         }
     }
 }

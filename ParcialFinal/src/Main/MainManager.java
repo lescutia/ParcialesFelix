@@ -18,29 +18,27 @@ import java.util.ArrayList;
  */
 public class MainManager
 {
-    
     public static void main( String args[] )
     {
         CGlobals.loadConfig();
         CGlobals.m_strLocalHost = NetworkUtils.getLocalIP();
         CGUIManager.addGUI( new LeaderSearchGUI(), "LeaderSearch" );
+        CGUIManager.addGUI( new LogInErrorGUI(), "LogInError" );
         CGUIManager.addGUI( new LeaderAlertGUI(), "LeaderAlert" );
         CGUIManager.addGUI( new MainGUI(), "Main" );
         CGUIManager.addGUI( new LogInGUI(), "LogIn" );
         
-        startApplication( true );
+        
+        startApp();
+        //CGUIManager.disposeAll();
     }
     
-    static Thread m_RMIUtilsThread;
-    
-    public static void startApplication( boolean in_bFirstTime )
+    public static void startApp()
     {
         CGUIManager.display( "LeaderSearch" );
-        
         CThreadManager.startThread( new ConnectionService().findLeaderThread(), "findLeader" );
         CThreadManager.waitForThread( "findLeader" );
-        
-        CGUIManager.dispose( "LeaderSearch" );
+        CGUIManager.hideGUI( "LeaderSearch" );
         
         if ( CGlobals.m_strLeaderId.equals( "" ) )
         {
@@ -51,20 +49,13 @@ public class MainManager
         {
             try
             {
-                if( m_RMIUtilsThread == null )
-                    m_RMIUtilsThread = new RMIUtils().ResourceUpdateChecker();
-                if( !m_RMIUtilsThread.isAlive() )
-                    m_RMIUtilsThread.start();
+                //CThreadManager.startThread( in_thread, in_strThreadName );
+                Thread checker = new RMIUtils().ResourceUpdateChecker();
+                checker.start();
             }
-            catch ( RemoteException e )
-            {
-                System.out.println( "RemoteException!!" );
-            }
+            catch ( RemoteException e ) { }
             
-            if( in_bFirstTime )
-                CGUIManager.display( "LogIn" );
-            else
-                CGlobals.login();
+            CGUIManager.display( "LogIn" );
         }
     }
 }

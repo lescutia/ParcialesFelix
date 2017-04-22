@@ -34,9 +34,10 @@ public class RMIUtils
             @Override
             public void run()
             {
+                boolean bExecute = true;
                 try
                 {
-                    while ( true )
+                    while ( bExecute )
                     {
                         if ( System.getSecurityManager() == null )
                         {
@@ -46,15 +47,19 @@ public class RMIUtils
                         ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
                         Thread.sleep( 500 );
                     }
-
                 }
                 catch ( RemoteException e )
                 {
+                    
+                    bExecute = false;
                     System.out.println( "[ResourceUpdateChecker]: Exception " );
                     CThreadManager.stopAllThreads();
-                    CGUIManager.disposeAll();
-                    MainManager.startApplication( false );
-                    e.printStackTrace();
+                    CGUIManager.hideAllGUIs();
+                    CGUIManager.display("LeaderAlert");
+                    CGlobals.m_strLeaderId = "";
+                    
+                    //MainManager.startApplication( false );
+                    //e.printStackTrace();
                 }
                 catch ( MalformedURLException e )
                 {
@@ -66,12 +71,12 @@ public class RMIUtils
                 }
                 catch ( InterruptedException e )
                 {
+                    bExecute = false;
                     e.printStackTrace();
                 }
-
             }
 
-        } );
+        });
         return thread;
     }
 }

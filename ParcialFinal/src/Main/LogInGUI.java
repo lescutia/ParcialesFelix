@@ -243,7 +243,12 @@ public class LogInGUI extends javax.swing.JFrame
             }
         } );
     }
-
+    
+    public void enableLogInBtn( boolean in_bEnable )
+    {
+        login.setEnabled( in_bEnable );
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton downloadDir;
     private javax.swing.JLabel jLabel1;

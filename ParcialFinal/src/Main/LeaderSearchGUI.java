@@ -16,7 +16,6 @@ public class LeaderSearchGUI extends javax.swing.JFrame {
      */
     public LeaderSearchGUI() {
         initComponents();
-        
     }
 
     /**
@@ -26,7 +25,8 @@ public class LeaderSearchGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jFrame1 = new javax.swing.JFrame();
         jProgressBar1 = new javax.swing.JProgressBar();
@@ -47,17 +47,23 @@ public class LeaderSearchGUI extends javax.swing.JFrame {
         setResizable(false);
 
         jProgressBar1.setIndeterminate(true);
-        jProgressBar1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+        jProgressBar1.addAncestorListener(new javax.swing.event.AncestorListener()
+        {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt)
+            {
             }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt)
+            {
                 jProgressBar1AncestorAdded(evt);
             }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt)
+            {
             }
         });
-        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener()
+        {
+            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            {
                 jProgressBar1StateChanged(evt);
             }
         });

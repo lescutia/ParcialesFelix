@@ -15,6 +15,9 @@ import java.rmi.RemoteException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import Global.*;
+import java.rmi.server.ExportException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CFileService
@@ -22,7 +25,14 @@ public class CFileService
 
     public CFileService()
     {
-
+        try
+        {
+            LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
+        }
+        catch ( RemoteException ex )
+        {
+            System.out.println( "[CFileService]: Registry already exist." );
+        }
     }
     
     public void startFileService()
@@ -32,19 +42,12 @@ public class CFileService
             if ( System.getSecurityManager() == null )
                 System.setProperty( "java.security.policy", "security.policy" );
             
-            LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
             CRemoteServiceIMP rsIMPObj = new CRemoteServiceIMP();
             Naming.rebind( "//"+CGlobals.m_strLocalHost+ ":" + CGlobals.m_iRemoteObjectPort + "/FileServer", rsIMPObj );
             System.out.println( "[CFileService]: FileService ready." );
 
-        } catch ( RemoteException e )
-        {
-            e.printStackTrace();
         }
-        catch(MalformedURLException e )
-        {
-            e.getStackTrace();
-        }
+        catch ( RemoteException|MalformedURLException e ) { }
     }
 
     public void downloadFile( String sFileName, String m_sHostName )
@@ -64,16 +67,7 @@ public class CFileService
 
             roObj.requestFile( sFileName, rObj );
             
-        } catch ( RemoteException e )
-        {
-            e.printStackTrace();
-        }
-        catch(MalformedURLException e ){
-            e.printStackTrace();
-        }
-        catch(NotBoundException e){
-            e.printStackTrace();
-        }
+        } catch ( RemoteException|MalformedURLException|NotBoundException e ) { }
 
     }
 
