@@ -15,9 +15,9 @@ import java.rmi.RemoteException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import Global.*;
-import java.rmi.server.ExportException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.rmi.server.ExportException;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 
 public class CFileService
@@ -47,7 +47,7 @@ public class CFileService
                 System.setProperty( "java.security.policy", "security.policy" );
             
             CRemoteServiceIMP rsIMPObj = new CRemoteServiceIMP();
-            Naming.rebind( "//"+CGlobals.m_strLocalHost+ ":" + CGlobals.m_iRemoteObjectPort + "/FileServer", rsIMPObj );
+            Naming.rebind( "//"+CGlobals.m_strLocalHost+ ":" + (CGlobals.m_iRemoteObjectPort+1) + "/FileServer", rsIMPObj );
             System.out.println( "[CFileService]: FileService ready." );
 
         }
@@ -66,12 +66,14 @@ public class CFileService
 
             //Registry registry = LocateRegistry.getRegistry( m_sHostName );
             CRemoteService roObj = null;
-            roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + CGlobals.m_iRemoteObjectPort+1 + "/FileServer" );
+            roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + (CGlobals.m_iRemoteObjectPort+1) + "/FileServer" );
             CCallBackIMP rObj = new CCallBackIMP();
 
             roObj.requestFile( sFileName, rObj );
             
-        } catch ( RemoteException|MalformedURLException|NotBoundException e ) { }
+        } catch ( RemoteException|MalformedURLException|NotBoundException e ) {
+            e.printStackTrace();
+        }
 
     }
 
