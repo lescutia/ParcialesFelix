@@ -22,16 +22,20 @@ import java.util.logging.Logger;
 
 public class CFileService
 {
-
     public CFileService()
+    {
+        
+    }
+    
+    public void initialize( )
     {
         try
         {
-            LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
+            LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort + 1 );
         }
         catch ( RemoteException ex )
         {
-            System.out.println( "[CFileService]: Registry already exist." );
+            System.out.println( "[CFileService]: Registry already exists." );
         }
     }
     
@@ -60,9 +64,9 @@ public class CFileService
                 System.setProperty( "java.security.policy", "security.policy" );
             }
 
-            Registry registry = LocateRegistry.getRegistry( m_sHostName );
+            //Registry registry = LocateRegistry.getRegistry( m_sHostName );
             CRemoteService roObj = null;
-            roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + CGlobals.m_iRemoteObjectPort + "/FileServer" );
+            roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + CGlobals.m_iRemoteObjectPort+1 + "/FileServer" );
             CCallBackIMP rObj = new CCallBackIMP();
 
             roObj.requestFile( sFileName, rObj );

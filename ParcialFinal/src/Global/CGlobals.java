@@ -124,6 +124,7 @@ public class CGlobals
             {
                 CThreadManager.startThread( new FileListener().fileListenerThread(), "FileListener");
                 CFileService fileService = new CFileService();
+                fileService.initialize( );
                 fileService.startFileService();
                 Updater u = new Updater();
                 u.sendTable();
