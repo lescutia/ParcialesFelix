@@ -43,7 +43,7 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
                     byte []data = new byte[1024*1024];
                     int dataLength = fis.read(data);
                     while(dataLength>0){
-                        in_Ref.writeData( in_strFileName, data, fileSize);
+                        in_Ref.writeData( in_strFileName, data, dataLength,fileSize);
                         dataLength = fis.read(data);
                     }
                     

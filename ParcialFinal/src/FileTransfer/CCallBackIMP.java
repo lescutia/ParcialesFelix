@@ -18,7 +18,7 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
     public CCallBackIMP() throws RemoteException{};
     
     @Override
-    public void writeData( String inFileName , byte[] data, long fileLength ) throws RemoteException
+    public void writeData( String inFileName , byte[] data, int dataLength,long fileLength ) throws RemoteException
     {
         
         try{
@@ -27,7 +27,7 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
             File file = new File(dir,inFileName);
             file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file, true);
-            fos.write( data , 0 , data.length );
+            fos.write( data , 0 , dataLength );
             fos.flush();
             fos.close();
         }
