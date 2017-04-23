@@ -1,12 +1,11 @@
-/** ************************************************************************
- * file:	 	FileService.java
- * date:		2017/04/08 17:38
- * author:		Luis Escutia, Gamaliel Palomo
- * Contact:    	escutialuis93@gmail.com
- *
- * brief: Contains method implementations of the remote service for
- * managing the file transfers with RMI.
- ************************************************************************* */
+/**************************************************************************
+	file:	 	CRemoteServiceIMP.java
+	date:		2017/04/08 17:38	
+	author:		Luis Eduardo Villela Zavala; Xitlali Moran Soltero
+	Contact:    	luisedo21@gmail.com
+
+	brief: Contains the implementation of CRemoteService.java interface.
+**************************************************************************/
 package FileTransfer;
 
 import Global.CGlobals;
@@ -22,6 +21,14 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
     {
     }
     
+    /**
+     *
+     * This method obtains the file requested by the user from the owner. 
+     * Uses FileInputStream to get the file and make a copy for the client who requested the file. 
+     * @param in_strFileName
+     * @param in_Ref
+     * @throws RemoteException
+     */
     @Override
     public void requestFile( String in_strFileName, FileTransfer.CCallback in_Ref ) throws RemoteException
     {
@@ -58,6 +65,12 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
 
     }
 
+    /**
+     *
+     * @param in_strFile
+     * @return the file size
+     * @throws RemoteException
+     */
     @Override
     public long getSize( String in_strFile ) throws RemoteException
     {

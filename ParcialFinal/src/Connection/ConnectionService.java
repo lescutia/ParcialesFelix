@@ -26,6 +26,10 @@ public class ConnectionService
         m_iTryAttempt = 0;
     }
     
+    /*
+        This thread permits the execution of the method findLeaderExecution to detect if 
+        there is a leader or not into the system. 
+    */
     public Thread findLeaderThread()
     {
         Thread thread = new Thread (new Runnable()
@@ -39,10 +43,17 @@ public class ConnectionService
         return thread;
     }
     
+    /*
+        Method to detect if there is a leader into the system. It uses sockets to do it. 
+    */
     void findLeaderExecution()
     {
         try
         {
+            /*
+                Variables declaration and sockets initialization. 
+                This is going to get the group IP and the local IP. 
+            */
             String msg = "NewNode";//CGlobals.m_strLocalHost;
             InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
             InetAddress local = InetAddress.getByName( CGlobals.m_strLocalHost );
@@ -51,10 +62,18 @@ public class ConnectionService
             DatagramPacket datagram = new DatagramPacket( data, data.length, group , CGlobals.m_iPortLeaderListener );
             System.out.println("Connected at: "+socket.getLocalAddress());
             DatagramSocket receiverSocket = new DatagramSocket( CGlobals.m_iPortLeaderListener+1 );
-            
+            /*
+                Looking for the system leader is a message that it is going to be printed if
+                the system is looking to another leader. 
+            */
             if ( CGlobals.m_bDebugConnection )
                 System.out.println( "[Node]: Looking for system leader" );
             
+            /*
+                This while contains a validation to do when the getting leader attempts are less than 4. 
+                If there are less than 4 it will active a receiverSocket to manage the time of the system users
+                and select a new leader through the LeaderService application. 
+            */
             while ( m_iTryAttempt < 4 )
             {
                 try

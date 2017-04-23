@@ -1,3 +1,13 @@
+/**************************************************************************
+	file:	 	FileListener.java
+	date:		2017/04/08 17:38
+	author:		Luis Escutia, Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: This class is responsible to listen the clients directories 
+        * and if the cliend add or remove files, this class will update 
+        * the file list.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,7 +33,10 @@ import java.io.IOException;
 
 public class FileListener
 {
-
+    /**
+     *
+     * @return the created thread
+     */
     public Thread fileListenerThread( )
     {
         String path = CGlobals.m_strSharedDirPath;
@@ -44,7 +57,12 @@ public class FileListener
         } );
         return thread;
     }
-
+    
+    /**
+     *
+     * @param path
+     * @throws InterruptedException
+     */
     public void listen( String path ) throws InterruptedException
     {
         Path myDir = Paths.get( path );

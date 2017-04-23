@@ -1,11 +1,14 @@
 /** ************************************************************************
- * file:	 	FileService.java
- * date:		2017/04/08 17:38
- * author:		Luis Escutia, Gamaliel Palomo
- * Contact:    	escutialuis93@gmail.com
- *
- * brief: Contains methods for managing the file transfers.
+    * file:	 	CFileService.java
+    * date:		2017/04/08 17:38
+    * author:		Luis Eduardo Villela Zavala; Xitlali Moran Soltero
+    * Contact:          luisedo21@gmail.com
+    *
+    * brief: This class initializes the File Service using RMI. 
+    * Then we can use a method to download the file for the client from 
+    * another client (The client who received the request).
  ************************************************************************* */
+
 package FileTransfer;
 
 import java.rmi.registry.LocateRegistry;
@@ -21,7 +24,10 @@ import java.util.ArrayList;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
-
+/**
+ *
+ * @author luise
+ */
 public class CFileService
 {
     public CFileService()
@@ -56,6 +62,11 @@ public class CFileService
         catch ( RemoteException|MalformedURLException e ) { }
     }
 
+    /**
+     *
+     * @param sFileName
+     * @param m_sHostName
+     */
     public void downloadFile( String sFileName, String m_sHostName )
     {
         

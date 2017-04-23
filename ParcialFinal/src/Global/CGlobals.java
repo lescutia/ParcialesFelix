@@ -7,6 +7,7 @@
 	brief: Contains control variables to manage the program.
 **************************************************************************/
 
+
 package Global;
 import Connection.ConnectionService;
 import FileTransfer.CFileService;

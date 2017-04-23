@@ -1,3 +1,15 @@
+/**************************************************************************
+	file:	 	NetworkUtils.java
+	date:		2017/04/08 16:17	
+	author:		Luis Eduardo Villela Zavala, Xitlali Moran Soltero
+	Contact:    	luisedo21@gmail.com
+
+	brief: This will update the checker of tyhe files through an RMI Naming only if there is a leader online. 
+        If not, the system will show the LeaderAlert user interface and is going to change the 
+        LeaderId to empty. 
+        @Return the thread created.
+**************************************************************************/
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,6 +36,11 @@ import java.rmi.NotBoundException;
 public class RMIUtils
 {
 
+    /**
+     *
+     * @return the thread created. 
+     * @throws RemoteException
+    */
     public Thread ResourceUpdateChecker() throws RemoteException
     {
         Thread thread = new Thread( new Runnable()
