@@ -1,3 +1,13 @@
+/**************************************************************************
+	file:	 	Updater.java
+	date:		2017/04/08 17:38
+	author:		Luis Escutia, Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: Include methods to the file listg management. 
+        * This class can create the list, get it and send it for the 
+        * functionality. 
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,6 +51,10 @@ public class Updater
         }
     }
 
+    /**
+     *
+     * @return The resource table 
+     */
     public ArrayList<ArrayList<String>> getResourceTable()
     {
         try
@@ -105,6 +119,11 @@ public class Updater
         }
     }
 
+    /**
+     *
+     * Ontains the file list of each client. 
+     * @return the file list. 
+     */
     public static ArrayList<String> getFileList()
     {
         File folder = new File( CGlobals.m_strSharedDirPath );

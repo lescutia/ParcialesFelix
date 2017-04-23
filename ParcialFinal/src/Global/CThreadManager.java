@@ -1,3 +1,12 @@
+/**************************************************************************
+	file:	 	CThreadManager.java
+	date:		2017/04/08 17:38
+	author:		Luis Escutia, Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: Contains tools to manage the threads.
+        * Include functions to wait, stop, start and remove.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,6 +27,11 @@ import jdk.nashorn.internal.objects.NativeArray;
 public class CThreadManager 
 {
     static Map<String, Thread> m_mapThreads = new LinkedHashMap();
+    /**
+     *
+     * @param in_thread 
+     * @param in_strThreadName
+     */
     
     public static void startThread( Thread in_thread, String in_strThreadName )
     {
@@ -33,7 +47,10 @@ public class CThreadManager
             System.out.println( "[CThreadManager]: Thread " + in_strThreadName + " already exists." );
     }
     
-
+    /**
+     *
+     * @param in_strThreadName
+     */
     public static void stopThread( String in_strThreadName )
     {
         if( m_mapThreads.containsKey( in_strThreadName ) )
@@ -48,6 +65,11 @@ public class CThreadManager
             System.out.println( "[CThreadManager]: Thread " + in_strThreadName + " doesn't exists." );
     }
     
+    /**
+     *
+     * @param in_strThreadName
+     * @return
+     */
     public static Thread getThread( String in_strThreadName )
     {
         if( m_mapThreads.containsKey( in_strThreadName ) )
@@ -55,6 +77,11 @@ public class CThreadManager
         return null;
     }
     
+    /**
+     *
+     * @param in_strThreadName
+     * @return
+     */
     public static boolean removeThread( String in_strThreadName )
     {
         if( m_mapThreads.containsKey( in_strThreadName ) )
@@ -67,6 +94,10 @@ public class CThreadManager
         return false;
     }
     
+    /**
+     *
+     * @param in_strThreadName
+     */
     public static void waitForThread( String in_strThreadName )
     {
         if( m_mapThreads.containsKey( in_strThreadName ) )
@@ -79,6 +110,9 @@ public class CThreadManager
         }
     }
     
+    /**
+     *
+     */
     public static void stopAllThreads()
     {
         m_mapThreads.entrySet().forEach((cachedElement) -> {

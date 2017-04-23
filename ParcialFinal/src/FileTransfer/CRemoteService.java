@@ -1,8 +1,8 @@
 /**************************************************************************
-	file:	 	FileService.java
+	file:	 	CRemoteService.java
 	date:		2017/04/08 17:38	
-	author:		Luis Escutia, Gamaliel Palomo
-	Contact:    	escutialuis93@gmail.com
+	author:		Luis Eduardo Villela Zavala; Xitlali Moran Soltero
+	Contact:    	luisedo21@gmail.com
 
 	brief: Contains the interface methods for remote service implementation.
 **************************************************************************/

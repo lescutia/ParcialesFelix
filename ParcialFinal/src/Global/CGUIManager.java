@@ -1,3 +1,11 @@
+/**************************************************************************
+	file:	 	CGuiManager.java
+	date:		2017/04/08 17:38	
+	author:		Luis Escutia; Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: Contains the implementation of the GUI interfaces manager.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -29,6 +37,10 @@ public class CGUIManager
         return false;
     }
     
+    /**
+     *
+     * @param in_strNameGUI
+     */
     public static void display( String in_strNameGUI )
     {
         if( m_mapGUIs.containsKey( in_strNameGUI ) )
@@ -42,6 +54,10 @@ public class CGUIManager
             System.out.println( "[CGUIManager]: " + in_strNameGUI + " GUI doesn't exist." );
     }
     
+    /**
+     *
+     * @param in_strNameGUI
+     */
     public static void hideGUI( String in_strNameGUI )
     {
         if( m_mapGUIs.containsKey( in_strNameGUI ) )
@@ -63,6 +79,10 @@ public class CGUIManager
         });
     }
     
+    /**
+     *
+     * @param in_strNameGUI
+     */
     public static void dispose( String in_strNameGUI )
     {
         if( m_mapGUIs.containsKey( in_strNameGUI ) )

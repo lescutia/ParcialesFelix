@@ -1,11 +1,12 @@
 /**************************************************************************
-	file:	 	Download.java
+	file:	 	CCallBackIMP.java
 	date:		2017/04/08 17:17	
-	author:		Luis Escutia, Gamaliel Palomo
-	Contact:    	escutialuis93@gmail.com
+	author:		Luis Eduardo Villela Zavala, Xitlali Moran Soltero
+	Contact:    	luisedo21@gmail.com
 
-	brief: Class to find in the network the actual leader in the LAN or the
-        service provider.
+	brief: This class is going to receive the requested files for the 
+        * client who has requested the specified file. 
+        * Implementation of CCallback Interface.
 **************************************************************************/
 package FileTransfer;
 import java.io.File;
@@ -13,10 +14,21 @@ import java.io.FileOutputStream;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 
+/**
+ *
+ * @author luise
+ */
 public class CCallBackIMP extends UnicastRemoteObject implements CCallback
 {
     public CCallBackIMP() throws RemoteException{};
     
+    /**
+     *
+     * @param inFileName
+     * @param data
+     * @param fileLength
+     * @throws RemoteException
+    */
     @Override
     public void writeData( String inFileName , byte[] data, int dataLength,long fileLength ) throws RemoteException
     {

@@ -1,3 +1,12 @@
+/**************************************************************************
+	file:	 	ResourceUpdateIMP.java
+	date:		2017/04/08 17:38
+	author:		Luis Escutia, Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: Implementation of ResourceUpdate interface. 
+        * This class is going to initialize a thread for the resource update. 
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +26,10 @@ import java.rmi.registry.LocateRegistry;
  *
  * @author gamaa
  */
+
+/*
+    This is the main class of the project. Here are the basic and initial specs of the system.
+*/
 public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUpdate
 {
 
@@ -27,6 +40,12 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         //table = new ArrayList<ArrayList<String>>();
     }
 
+    /**
+     *
+     * @param owner
+     * @param list
+     * @throws RemoteException
+     */
     @Override
     public void update( String owner, ArrayList<String> list ) throws RemoteException
     {
@@ -57,6 +76,13 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         return null;//table;
     }
     
+    /**
+     *
+     * @param in_user
+     * @param in_pass
+     * @return false
+     * @throws RemoteException
+     */
     @Override
     public boolean checkUser(String in_user, String in_pass ) throws RemoteException
     {
