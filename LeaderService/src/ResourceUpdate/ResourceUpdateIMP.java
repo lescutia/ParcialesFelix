@@ -20,11 +20,12 @@ import java.rmi.registry.LocateRegistry;
 public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUpdate
 {
 
-    private ArrayList<ArrayList<String>> table;
+    private ArrayList<ArrayList<String>> m_OpenTable;
+    private ArrayList<ArrayList<String>> m_CloseTable;
 
     public ResourceUpdateIMP() throws RemoteException
     {
-        table = new ArrayList<ArrayList<String>>();
+        m_OpenTable = new ArrayList<ArrayList<String>>();
     }
 
     @Override
@@ -41,19 +42,19 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         int i = findIndex( owner );
         if ( i == -1 )
         {
-            table.add( tmp );
+            m_OpenTable.add( tmp );
         }
         else
         {
-            table.remove( i );
-            table.add( i, tmp );
+            m_OpenTable.remove( i );
+            m_OpenTable.add( i, tmp );
         }
     }
 
     @Override
     public ArrayList<ArrayList<String>> getTable() throws RemoteException
     {
-        return table;
+        return m_OpenTable;
     }
     
     @Override
@@ -64,11 +65,11 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
             
     int findIndex( String owner )
     {
-        for ( ArrayList<String> element : table )
+        for ( ArrayList<String> element : m_OpenTable )
         {
             if ( element.get( 0 ).equals( owner ) )
             {
-                return table.indexOf( element );
+                return m_OpenTable.indexOf( element );
             }
         }
         return -1;

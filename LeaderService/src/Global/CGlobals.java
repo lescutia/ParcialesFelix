@@ -13,11 +13,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author gamaa
- */
-public class CGlobals {
+public class CGlobals 
+{
     
     /********************************************************
                     Network Variables
@@ -29,6 +26,7 @@ public class CGlobals {
     /*< Local host IP address. */
     public static String m_strLocalHost = "";  
     
+    public static boolean m_bDebugCS = true;
     
     /********************************************************
                     Port Variables
