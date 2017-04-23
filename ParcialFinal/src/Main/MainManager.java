@@ -20,6 +20,7 @@ import Global.*;
 import ResourceUpdate.*;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
@@ -36,7 +37,6 @@ public class MainManager
         CGUIManager.addGUI( new LeaderAlertGUI(), "LeaderAlert" );
         CGUIManager.addGUI( new MainGUI(), "Main" );
         CGUIManager.addGUI( new LogInGUI(), "LogIn" );
-        
         
         startApp();
         //CGUIManager.disposeAll();

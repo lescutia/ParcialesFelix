@@ -9,7 +9,6 @@
         * Implementation of CCallback Interface.
 **************************************************************************/
 package FileTransfer;
-import Global.CDownloadManager;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,7 +43,6 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
             File dir = new File(Global.CGlobals.m_strDownloadPath);
             File file = new File(dir,inFileName);
             long progress = file.length()/fileLength;
-            CDownloadManager.setProgress( inFileName, progress );
             file.createNewFile();
             FileOutputStream fos = new FileOutputStream(file, true);
             fos.write( data , 0 , dataLength );
