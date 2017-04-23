@@ -43,19 +43,17 @@ public class ConnectionService
     {
         try
         {
-            String msg = CGlobals.m_strLocalHost;
+            String msg = "NewNode";//CGlobals.m_strLocalHost;
             InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
-            InetAddress local = InetAddress.getByName( msg );
+            InetAddress local = InetAddress.getByName( CGlobals.m_strLocalHost );
             byte[] data = msg.getBytes();
             DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener, local );
             DatagramPacket datagram = new DatagramPacket( data, data.length, group , CGlobals.m_iPortLeaderListener );
             System.out.println("Connected at: "+socket.getLocalAddress());
             DatagramSocket receiverSocket = new DatagramSocket( CGlobals.m_iPortLeaderListener+1 );
-            if ( CGlobals.m_bDebugConnection )
-            {
-                System.out.println( "[Node]: Looking for system leader" );
-            }
             
+            if ( CGlobals.m_bDebugConnection )
+                System.out.println( "[Node]: Looking for system leader" );
             
             while ( m_iTryAttempt < 4 )
             {

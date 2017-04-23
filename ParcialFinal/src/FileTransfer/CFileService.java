@@ -15,6 +15,8 @@ import java.rmi.RemoteException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import Global.*;
+import ResourceUpdate.Updater;
+import java.util.ArrayList;
 //import java.rmi.server.ExportException;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
@@ -56,6 +58,13 @@ public class CFileService
 
     public void downloadFile( String sFileName, String m_sHostName )
     {
+        
+        ArrayList<String> fileList = Updater.getFileList();
+        for(String element: fileList){
+            if(element.equals( sFileName) )
+                return;
+        }
+        
         try
         {
 

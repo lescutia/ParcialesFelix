@@ -105,7 +105,7 @@ public class Updater
         }
     }
 
-    public ArrayList<String> getFileList()
+    public static ArrayList<String> getFileList()
     {
         File folder = new File( CGlobals.m_strSharedDirPath );
         File[] listOfFiles = folder.listFiles();
