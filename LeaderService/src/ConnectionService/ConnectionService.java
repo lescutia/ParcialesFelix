@@ -1,3 +1,13 @@
+/**************************************************************************
+	file:	 	ConnectionService.java
+	date:		2017/04/08 16:17	
+	author:		Luis Escutia, Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: Class to initialize the connection servide for the leader. 
+        * Includes a thread for the leader management.  
+        service provider.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +27,10 @@ import java.io.IOException;
 public class ConnectionService
 {
 
+    /**
+     *
+     * @return the created thread. 
+     */
     public Thread ConnectionService()
     {
         
@@ -29,6 +43,7 @@ public class ConnectionService
                 {
 
                     InetAddress group = InetAddress.getByName( CGlobals.m_strGroupId );
+                    //Socket to make the control of the multicast. 
                     MulticastSocket socket = new MulticastSocket( CGlobals.m_iPortLeaderListener );
                     socket.joinGroup( group );
                     byte[] data = new byte[1024];
@@ -72,6 +87,10 @@ public class ConnectionService
         return thread;
     }
 
+    /**
+     * This class creates a thread for the KeepAlive service. 
+     * @return Thread created
+     */
     public Thread KeepAliveCastService()
     {
         Thread thread = new Thread( new Runnable()

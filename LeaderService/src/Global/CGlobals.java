@@ -1,3 +1,11 @@
+/**************************************************************************
+	file:	 	CGlobals.java
+	date:		2017/04/08 16:17	
+	author:		Luis Escutia, Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: Class to declare all the global variables.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,7 +33,7 @@ public class CGlobals
     public static String m_strLeaderId  = "";
     /*< Local host IP address. */
     public static String m_strLocalHost = "";  
-    
+    //Flag for the debug
     public static boolean m_bDebugCS = true;
     
     /********************************************************
@@ -36,6 +44,12 @@ public class CGlobals
     /*< Time in miliseconds to wait for leader reply. */
     public static int m_iRemoteObjectPort 	= 1500;
     
+    /**
+     *
+     * @param in_username is the name of the current user. 
+     * @param in_password is the password of the current user. 
+     * @return true if the user exists, otherwise false. 
+     */
     public static boolean checkUser( String in_username, String in_password )
     {
         try

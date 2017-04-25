@@ -1,3 +1,11 @@
+/**************************************************************************
+	file:	 	HttpConnection.java
+	date:		2017/04/08 16:17	
+	author:		Luis Eduardo Villela Zavala; Xitlali Mor?n Soltero
+	Contact:    	luisedo21@gmail.com
+
+	brief: Class to manage the HTTP Connections, including methods Get and Post.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,7 +34,7 @@ import java.util.Map;
  */
 public class HttpConnection
 {
-
+    //Return the post data bytes into an array. 
     private static byte[] getPostData( Map<String, Object> params ) throws UnsupportedEncodingException
     {
 
@@ -47,6 +55,15 @@ public class HttpConnection
         return postDataBytes;
     }
 
+    /**
+     * Basics of the POST method.
+     * @param host 
+     * @param params is an object with a list of params. 
+     * @return a String converted with StringBuilder
+     * @throws MalformedURLException
+     * @throws UnsupportedEncodingException
+     * @throws IOException
+     */
     public static String post( String host, Map<String, Object> params ) throws MalformedURLException, UnsupportedEncodingException, IOException
     {
         URL url = new URL( host );
@@ -71,6 +88,11 @@ public class HttpConnection
         return sb.toString();
     }
 
+    /**
+     * Basics of the GET method. 
+     * @param url receives the URL where the method is going to do the GET method execution. 
+     * @throws IOException
+     */
     public static void get( String url ) throws IOException
     {
 
@@ -104,6 +126,13 @@ public class HttpConnection
 
     }
 
+    /**
+     * This method is the responsible to download the requested file and store it into the saveDir. 
+     * @param fileURL is the file location. The file is going to be saved in the next variable. 
+     * @param saveDir is the URL where the file is going to be saved. 
+     * @param params is an object full of parameters. 
+     * @throws IOException
+     */
     public static void downloadFile( String fileURL, String saveDir, Map<String, Object> params ) throws IOException
     {
 

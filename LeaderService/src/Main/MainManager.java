@@ -1,3 +1,11 @@
+/**************************************************************************
+	file:	 	MainManager.java
+	date:		2017/04/08 16:17	
+	author:		Luis Escutia; Gamaliel Palomo
+	Contact:    	escutialuis93@gmail.com
+
+	brief: The main class of the Leader Service.
+**************************************************************************/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
