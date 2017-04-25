@@ -60,7 +60,7 @@ public class FileListener
     
     /**
      *
-     * @param path
+     * @param path is the directory path to be listened. 
      * @throws InterruptedException
      */
     public void listen( String path ) throws InterruptedException

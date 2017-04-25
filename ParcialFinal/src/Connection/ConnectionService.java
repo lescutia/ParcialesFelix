@@ -30,8 +30,15 @@ public class ConnectionService
         This thread permits the execution of the method findLeaderExecution to detect if 
         there is a leader or not into the system. 
     */
+
+    /**
+     *
+     * @return the thread for the leader selection. 
+     */
+
     public Thread findLeaderThread()
     {
+        //This thread is made for the leader selection. 
         Thread thread = new Thread (new Runnable()
         {
             @Override
@@ -55,6 +62,7 @@ public class ConnectionService
                 This is going to get the group IP and the local IP. 
             */
             String msg = "NewNode";//CGlobals.m_strLocalHost;
+            //Variables for the IP management
             InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
             InetAddress local = InetAddress.getByName( CGlobals.m_strLocalHost );
             byte[] data = msg.getBytes();

@@ -1,6 +1,6 @@
 /**************************************************************************
 	file:	 	CCallBackIMP.java
-	date:		2017/04/08 17:17	
+	date:		2017/04/08 17:17
 	author:		Luis Eduardo Villela Zavala, Xitlali Moran Soltero
 	Contact:    	luisedo21@gmail.com
 
@@ -28,13 +28,13 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
     
     /**
      *
-     * @param inFileName
-     * @param data
-     * @param fileLength
+     * @param inFileName is the name of the file that is going to be written.
+     * @param data the file content to be written
+     * @param fileLength is the length of the new file
      * @throws RemoteException
     */
     @Override
-    public void writeData( String inFileName , byte[] data, int dataLength,long fileLength ) throws RemoteException
+    public void writeData( String inFileName , byte[] data, int dataLength, long fileLength ) throws RemoteException
     {
         
         try{
@@ -55,6 +55,9 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
         
     }
     
+    /*
+        This method is the responsible to carry a register into an specified log. 
+    */
     static void writeLog(String fileName, String requester){
         try {
          // APPEND MODE SET HERE

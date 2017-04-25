@@ -64,12 +64,12 @@ public class CFileService
 
     /**
      *
-     * @param sFileName
-     * @param m_sHostName
+     * @param sFileName is the name of the file that is going to be downloaded. 
+     * @param m_sHostName is the name of the current host. 
      */
     public void downloadFile( String sFileName, String m_sHostName )
     {
-        
+        //This ArrayList make a copy of the current File List of every connected users. 
         ArrayList<String> fileList = Updater.getFileList();
         for(String element: fileList){
             if(element.equals( sFileName) )
@@ -78,7 +78,6 @@ public class CFileService
         
         try
         {
-
             if ( System.getSecurityManager() == null )
             {
                 System.setProperty( "java.security.policy", "security.policy" );

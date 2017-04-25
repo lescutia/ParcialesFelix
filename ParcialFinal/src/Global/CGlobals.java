@@ -37,11 +37,11 @@ public class CGlobals
     /********************************************************
 			Network Variables
     ********************************************************/
-    /*< ID of the group to which the multicast will be sent. */
+    /* ID of the group to which the multicast will be sent. */
     public static String m_strGroupId   = "224.0.0.5";
-    /*< ID of the leader of the group. */
+    /* ID of the leader of the group. */
     public static String m_strLeaderId  = "";
-    /*< Local host IP address. */
+    /* Local host IP address. */
     public static String m_strLocalHost = "";
 	
     /********************************************************
@@ -57,15 +57,20 @@ public class CGlobals
     /********************************************************
                         Resource Variables
     ********************************************************/
+    //Path for the Download directory. 
     public static String m_strDownloadPath = "";
+    //Path for the Shared Directory. 
     public static String m_strSharedDirPath = "";
+    //Value of the userName of the current user. It is going to be used into Authentication Web Service. 
     public static String m_strUsername = "";
+    //Value of the Password of the current user. It is going to be used into Authentication Web Service.
     public static String m_strPassword = "";
     
     public static void saveConfig()
     {
         try
         {
+            //File to save the configurations data (Paths for download and share). 
             FileWriter fw = new FileWriter( "config.txt" );
             PrintWriter pw = new PrintWriter( fw );
             
@@ -80,9 +85,11 @@ public class CGlobals
     {
         try
         {
+            //This variable saves the local IP of the user. 
             m_strLocalHost = Connection.NetworkUtils.getLocalIP();
                 System.setProperty("java.rmi.server.hostname",m_strLocalHost);
             
+            //New variable to create a file for the configurations. 
             File file = new File( "config.txt" );
             Scanner br = new Scanner( file );
             
@@ -96,9 +103,17 @@ public class CGlobals
         catch( IOException e ) {}
     }
     
+    //This is a property for the encrypt. 
     private static int m_iWorkload = 12;
+
+    /**
+     *
+     * @param password_plaintext This variable is the password before encrypting. 
+     * @return the encrypted password in String format. 
+     */
     public static String hashPassword( String password_plaintext )
     {
+        //It refers to the times that the algorithm is going to be sent recursivelly. 
         String salt = BCrypt.gensalt( m_iWorkload );
         String hashed_password = BCrypt.hashpw( password_plaintext, salt );
 

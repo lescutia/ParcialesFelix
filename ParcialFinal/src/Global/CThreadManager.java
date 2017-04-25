@@ -29,8 +29,8 @@ public class CThreadManager
     static Map<String, Thread> m_mapThreads = new LinkedHashMap();
     /**
      *
-     * @param in_thread 
-     * @param in_strThreadName
+     * @param in_thread is the thread to be initialized. 
+     * @param in_strThreadName is the name of the thread to be initiailized. 
      */
     
     public static void startThread( Thread in_thread, String in_strThreadName )
@@ -49,7 +49,7 @@ public class CThreadManager
     
     /**
      *
-     * @param in_strThreadName
+     * @param in_strThreadName is the name of the thread to be stopped. 
      */
     public static void stopThread( String in_strThreadName )
     {
@@ -67,8 +67,8 @@ public class CThreadManager
     
     /**
      *
-     * @param in_strThreadName
-     * @return
+     * @param in_strThreadName is the name of the thread to be gotten. 
+     * @return the tread if it exists, null if the thread does not exist. 
      */
     public static Thread getThread( String in_strThreadName )
     {
@@ -79,8 +79,8 @@ public class CThreadManager
     
     /**
      *
-     * @param in_strThreadName
-     * @return
+     * @param in_strThreadName is the name of the thread to be removed. 
+     * @return true if the tread was deleted; false if not. 
      */
     public static boolean removeThread( String in_strThreadName )
     {
@@ -96,7 +96,7 @@ public class CThreadManager
     
     /**
      *
-     * @param in_strThreadName
+     * @param in_strThreadName is the name of the thread to be waitted. 
      */
     public static void waitForThread( String in_strThreadName )
     {
@@ -111,7 +111,7 @@ public class CThreadManager
     }
     
     /**
-     *
+     This function will stop all the threads. 
      */
     public static void stopAllThreads()
     {

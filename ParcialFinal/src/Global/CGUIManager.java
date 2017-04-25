@@ -39,7 +39,7 @@ public class CGUIManager
     
     /**
      *
-     * @param in_strNameGUI
+     * @param in_strNameGUI is the name of the graphic interface to be showed. 
      */
     public static void display( String in_strNameGUI )
     {
@@ -56,7 +56,7 @@ public class CGUIManager
     
     /**
      *
-     * @param in_strNameGUI
+     * @param in_strNameGUI is the name of the graphic interface to be hidden. 
      */
     public static void hideGUI( String in_strNameGUI )
     {
@@ -70,6 +70,7 @@ public class CGUIManager
             System.out.println( "[CGUIManager]: " + in_strNameGUI + " GUI doesn't exist." );
     }
     
+    //This function will hide all the graphic interfaces. 
     public static void hideAllGUIs()
     {
         m_mapGUIs.entrySet().forEach((cachedElement) -> {

@@ -60,7 +60,9 @@ public class RMIUtils
                         {
                             System.setProperty( "java.security.policy", "security.policy" );
                         }
+                        //This variable is for the registry and it needs the LeaderID to initialize it. 
                         r = LocateRegistry.getRegistry( CGlobals.m_strLeaderId );
+                        //This variable saves the RMI URL to do the connection. 
                         ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
                         Thread.sleep( 500 );
                     }

@@ -42,8 +42,8 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
 
     /**
      *
-     * @param owner
-     * @param list
+     * @param owner of the file. 
+     * @param list is the file list of the owner. 
      * @throws RemoteException
      */
     @Override

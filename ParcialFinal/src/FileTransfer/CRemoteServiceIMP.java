@@ -25,8 +25,8 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
      *
      * This method obtains the file requested by the user from the owner. 
      * Uses FileInputStream to get the file and make a copy for the client who requested the file. 
-     * @param in_strFileName
-     * @param in_Ref
+     * @param in_strFileName is the name of the requested file. 
+     * @param in_Ref is the callback to make the file transfer.
      * @throws RemoteException
      */
     @Override
@@ -67,7 +67,7 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
 
     /**
      *
-     * @param in_strFile
+     * @param in_strFile is the name of the file and then we are aoing to get the file size. 
      * @return the file size
      * @throws RemoteException
      */

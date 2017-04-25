@@ -24,6 +24,11 @@ import java.util.Enumeration;
  * @author gamaa
  */
 public class NetworkUtils {
+
+    /**
+     *
+     * @return the IP Address if the algorithm found it, and null if not. 
+     */
     public static String getLocalIP(){
         try {
                 for (Enumeration en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
