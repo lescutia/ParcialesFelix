@@ -62,14 +62,14 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
         This method is the responsible to carry a register into an specified log. 
     */
     @Override
-    public void writeLog(String owner, String fileName, String requester) throws RemoteException
+    public void writeLog(String owner, String fileName) throws RemoteException
     {
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
             BufferedWriter bw = new BufferedWriter(new FileWriter("transfers.log", true));
-            String line = fileName + " to " + requester + "  " + dateFormat.format( date ) ;  
+            String line = fileName + " to " + CGlobals.m_strLocalHost + "  " + dateFormat.format( date ) ;  
             bw.write(line);
             bw.newLine();
             bw.flush();
