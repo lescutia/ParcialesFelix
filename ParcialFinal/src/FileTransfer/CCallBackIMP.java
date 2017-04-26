@@ -69,10 +69,11 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
             Date date = new Date();
             System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
             BufferedWriter bw = new BufferedWriter(new FileWriter("transfers.log", true));
-            String line = fileName + " to " + CGlobals.m_strLocalHost + "  " + dateFormat.format( date ) ;  
+            String line = fileName + " from " + CGlobals.m_strLocalHost + " to "  + owner + " at " + dateFormat.format( date ) ;  
             bw.write(line);
             bw.newLine();
             bw.flush();
+            bw.close();
         } catch (IOException ioe) {
            ioe.printStackTrace();
         }

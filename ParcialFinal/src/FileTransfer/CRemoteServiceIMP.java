@@ -52,7 +52,7 @@ public class CRemoteServiceIMP extends UnicastRemoteObject implements CRemoteSer
                         in_Ref.writeData( in_strFileName, data, dataLength,fileSize);
                         dataLength = fis.read(data);
                     }
-                    in_Ref.writeLog( CGlobals.m_strLocalHost, in_strFileName, in_Ref. );
+                    in_Ref.writeLog( CGlobals.m_strLocalHost, in_strFileName );
                     fis.close();
                     
                 } catch ( Exception e )
