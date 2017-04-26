@@ -49,6 +49,7 @@ public class LeaderAlertGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Error");
+        setResizable(false);
 
         tryAgain.setText("Try again");
         tryAgain.addActionListener(new java.awt.event.ActionListener()

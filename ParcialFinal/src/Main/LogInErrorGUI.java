@@ -37,6 +37,7 @@ public class LogInErrorGUI extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        setResizable(false);
 
         jLabel1.setText("LogIn Error");
 

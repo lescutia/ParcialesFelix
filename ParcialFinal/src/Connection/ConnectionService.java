@@ -58,13 +58,12 @@ public class ConnectionService
             @Override
             public void run()
             {
-                System.out.println("!!!!!!!!!!!!!!!");
                 while(keepAliveFlag){
                     try{
+                        keepAliveServiceExecution();
                         Thread.sleep(1000);
                     }
                     catch(InterruptedException e){
-                        System.out.println("[ConnectionService]: KeepAlive Interruped!!!!!");
                         keepAliveFlag = false;
                     }
                 }
@@ -157,7 +156,6 @@ public class ConnectionService
             byte[] data = msg.getBytes();
             DatagramSocket socket = new DatagramSocket( );
             DatagramPacket datagram = new DatagramPacket( data, data.length, leader , CGlobals.m_iPortLeaderListener );
-            System.out.println("Connected at: "+socket.getLocalAddress());
             /*
                 Looking for the system leader is a message that it is going to be printed if
                 the system is looking to another leader. 
