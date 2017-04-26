@@ -44,6 +44,7 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
             File file = new File(dir,inFileName);
             long progress = file.length()/fileLength;
             file.createNewFile();
+            System.out.println( "[CallBack]: Progress: " + progress +"%");
             FileOutputStream fos = new FileOutputStream(file, true);
             fos.write( data , 0 , dataLength );
             fos.flush();
