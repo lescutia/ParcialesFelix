@@ -139,6 +139,8 @@ public class CGlobals
             ru = (ResourceUpdate) Naming.lookup( "//" + CGlobals.m_strLeaderId + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer" );
             if( ru.checkUser( m_strUsername, hashPassword( m_strPassword ) ) )
             {
+                Thread keepAlive = new ConnectionService().keepAliveThread();
+                CThreadManager.startThread( keepAlive, "KeepAlive" );
                 CThreadManager.startThread( new FileListener().fileListenerThread(), "FileListener");
                 CFileService fileService = new CFileService();
                 fileService.initialize( );

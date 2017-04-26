@@ -60,9 +60,7 @@ public class MainManager
             {
                 //CThreadManager.startThread( in_thread, in_strThreadName );
                 Thread checker = new RMIUtils().ResourceUpdateChecker();
-                Thread keepAlive = new ConnectionService().keepAliveThread();
                 checker.start();
-                CThreadManager.startThread( keepAlive, "KeepAlive" );
             }
             catch ( RemoteException e ) { }
             
