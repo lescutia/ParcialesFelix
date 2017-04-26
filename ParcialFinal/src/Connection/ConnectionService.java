@@ -58,6 +58,7 @@ public class ConnectionService
             @Override
             public void run()
             {
+                System.out.println("!!!!!!!!!!!!!!!");
                 while(keepAliveFlag){
                     try{
                         Thread.sleep(1000);
@@ -153,9 +154,8 @@ public class ConnectionService
             String msg = "KeepAlive";//CGlobals.m_strLocalHost;
             //Variables for the IP management
             InetAddress leader = InetAddress.getByName(CGlobals.m_strLeaderId );
-            InetAddress local = InetAddress.getByName( CGlobals.m_strLocalHost );
             byte[] data = msg.getBytes();
-            DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener, local );
+            DatagramSocket socket = new DatagramSocket( );
             DatagramPacket datagram = new DatagramPacket( data, data.length, leader , CGlobals.m_iPortLeaderListener );
             System.out.println("Connected at: "+socket.getLocalAddress());
             /*
