@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.RemoteException;
 import Global.CGlobals;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -39,13 +42,12 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
     {
         
         try{
-            writeLog(inFileName,CGlobals.m_strLocalHost);
             File dir = new File(Global.CGlobals.m_strDownloadPath);
             File file = new File(dir,inFileName);
             
             int progress = (int)(((float)file.length()/fileLength)*100);
             file.createNewFile();
-            System.out.println( "[CallBack]: Progress: " + progress +"%");
+            System.out.println( "[Download]: "+ inFileName+" " + progress +"%");
             FileOutputStream fos = new FileOutputStream(file, true);
             fos.write( data , 0 , dataLength );
             fos.flush();
@@ -56,21 +58,25 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
         }
         
     }
-    
     /*
         This method is the responsible to carry a register into an specified log. 
     */
-    static void writeLog(String fileName, String requester){
+    @Override
+    public void writeLog(String owner, String fileName, String requester) throws RemoteException
+    {
         try {
-         // APPEND MODE SET HERE
-         BufferedWriter bw = new BufferedWriter(new FileWriter("transfers.log", true));
-         String line = fileName + "to" + requester;  
-	 bw.write(line);
-	 bw.newLine();
-	 bw.flush();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
+            BufferedWriter bw = new BufferedWriter(new FileWriter("transfers.log", true));
+            String line = fileName + " to " + requester + "  " + dateFormat.format( date ) ;  
+            bw.write(line);
+            bw.newLine();
+            bw.flush();
         } catch (IOException ioe) {
            ioe.printStackTrace();
         }
     }
+    
     
 }

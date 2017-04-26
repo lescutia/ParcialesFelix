@@ -20,4 +20,5 @@ import java.rmi.*;
 public interface CCallback extends Remote
 {
     public void writeData(String inFileName, byte []data , int dataLength,long fileLength) throws RemoteException;
+    public void writeLog(String owner, String fileName, String requester) throws RemoteException;
 }
