@@ -152,11 +152,11 @@ public class ConnectionService
             */
             String msg = "KeepAlive";//CGlobals.m_strLocalHost;
             //Variables for the IP management
-            InetAddress group = InetAddress.getByName(CGlobals.m_strGroupId );
+            InetAddress leader = InetAddress.getByName(CGlobals.m_strLeaderId );
             InetAddress local = InetAddress.getByName( CGlobals.m_strLocalHost );
             byte[] data = msg.getBytes();
             DatagramSocket socket = new DatagramSocket( CGlobals.m_iPortLeaderListener, local );
-            DatagramPacket datagram = new DatagramPacket( data, data.length, group , CGlobals.m_iPortLeaderListener );
+            DatagramPacket datagram = new DatagramPacket( data, data.length, leader , CGlobals.m_iPortLeaderListener );
             System.out.println("Connected at: "+socket.getLocalAddress());
             /*
                 Looking for the system leader is a message that it is going to be printed if
