@@ -87,7 +87,7 @@ public class CFileService
             CRemoteService roObj = null;
             roObj = (CRemoteService) Naming.lookup( "//" + m_sHostName + ":" + (CGlobals.m_iRemoteObjectPort+1) + "/FileServer" );
             CCallBackIMP rObj = new CCallBackIMP();
-
+            
             roObj.requestFile( sFileName, rObj );
             
         } catch ( RemoteException|MalformedURLException|NotBoundException e ) {
