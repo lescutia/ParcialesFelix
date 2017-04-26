@@ -39,9 +39,9 @@ public class ConnectionService
             @Override
             public void run()
             {
+                
                 try
                 {
-
                     InetAddress group = InetAddress.getByName( CGlobals.m_strGroupId );
                     //Socket to make the control of the multicast. 
                     MulticastSocket socket = new MulticastSocket( CGlobals.m_iPortLeaderListener );
@@ -58,7 +58,7 @@ public class ConnectionService
                         msg = new String( packet.getData(), packet.getOffset(), packet.getLength() );
                         if ( msg.equals( "KeepAlive" ) )
                         {
-                            
+                            System.out.println("[ConnectionService]: KeepAlive received from: "+packetIPAddress);
                         }
                         else if ( msg.equals( "NewNode" ) )
                         {
@@ -74,7 +74,6 @@ public class ConnectionService
                             System.out.println( "[ConnectionService]: Error message \"" + msg + "\" can't be processed." );
                         }
                     }
-
                 }
                 catch ( SocketException | UnknownHostException e ) {}
                 catch ( IOException e )
@@ -87,32 +86,5 @@ public class ConnectionService
         return thread;
     }
 
-    /**
-     * This class creates a thread for the KeepAlive service. 
-     * @return Thread created
-     */
-    public Thread KeepAliveCastService()
-    {
-        Thread thread = new Thread( new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
 
-                }
-                catch ( Exception e )
-                {
-                }
-            }
-        } );
-        return thread;
-    }
-
-    public static void main( String args[] )
-    {
-        ConnectionService cs = new ConnectionService();
-        cs.ConnectionService();
-    }
 }
