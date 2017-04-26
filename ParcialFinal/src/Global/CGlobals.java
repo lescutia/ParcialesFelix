@@ -28,7 +28,7 @@ public class CGlobals
 			Debug Flags
     ********************************************************/
     /*< Flag to active or disable debug mode in class Node. */
-    public static boolean m_bDebugConnection	= true;
+    public static boolean m_bDebugConnection	= false;
     public static boolean m_bDebugExceptions    = true;
     public static boolean m_bDebugThreadMngr    = true;
     public static boolean m_bDebugGUIMngr       = true;

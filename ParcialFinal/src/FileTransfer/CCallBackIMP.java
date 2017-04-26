@@ -30,6 +30,7 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
      *
      * @param inFileName is the name of the file that is going to be written.
      * @param data the file content to be written
+     * @param dataLength the length of the byte array incoming
      * @param fileLength is the length of the new file
      * @throws RemoteException
     */
@@ -38,11 +39,11 @@ public class CCallBackIMP extends UnicastRemoteObject implements CCallback
     {
         
         try{
-            System.out.println("File size ["+inFileName+"]:"+fileLength);
             writeLog(inFileName,CGlobals.m_strLocalHost);
             File dir = new File(Global.CGlobals.m_strDownloadPath);
             File file = new File(dir,inFileName);
-            long progress = dataLength/fileLength;
+            
+            int progress = (int)(((float)file.length()/fileLength)*100);
             file.createNewFile();
             System.out.println( "[CallBack]: Progress: " + progress +"%");
             FileOutputStream fos = new FileOutputStream(file, true);
