@@ -16,8 +16,11 @@
 package ConnectionService;
 
 import Global.CGlobals;
+import ResourceUpdate.ResourceUpdateIMP;
 import java.net.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -26,11 +29,40 @@ import java.io.IOException;
 
 public class ConnectionService
 {
-
+    ArrayList<String> aliveNodes;
+    public ConnectionService()
+    {
+        aliveNodes = new ArrayList<>();
+    }
     /**
      *
      * @return the created thread. 
      */
+    
+    public Thread TimerThread()
+    {
+        Thread thread = new Thread( new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while(true){
+                    try
+                    {
+                        updateTable();
+                        Thread.sleep(2000);
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                
+            }
+        });
+        
+        return thread;        
+    }
+    
     public Thread ConnectionService()
     {
         
@@ -55,10 +87,14 @@ public class ConnectionService
                         DatagramPacket packet = new DatagramPacket( data, data.length );
                         socket.receive( packet );
                         String packetIPAddress = packet.getAddress().toString();
+                        packetIPAddress = packetIPAddress.replace( "/", "" );
                         msg = new String( packet.getData(), packet.getOffset(), packet.getLength() );
                         if ( msg.equals( "KeepAlive" ) )
                         {
-                            System.out.println("[ConnectionService]: KeepAlive received from: "+packetIPAddress);
+                            //System.out.println("[ConnectionService]: KeepAlive received from: "+packetIPAddress);
+                            if(aliveNodes.indexOf( packetIPAddress )<0){
+                                aliveNodes.add(packetIPAddress);
+                            }
                         }
                         else if ( msg.equals( "NewNode" ) )
                         {
@@ -86,5 +122,15 @@ public class ConnectionService
         return thread;
     }
 
-
+    void updateTable()
+    {
+        
+        try{
+           System.out.println("AliveNodes: "+aliveNodes);
+           ResourceUpdateIMP.getInstance().updateTable( aliveNodes ); 
+           aliveNodes.clear();
+        }
+        catch(RemoteException e){}
+        
+    }
 }

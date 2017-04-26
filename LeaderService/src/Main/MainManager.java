@@ -26,15 +26,19 @@ public class MainManager {
         ConnectionService cs = new ConnectionService();
         Thread leaderListener = cs.ConnectionService();
         leaderListener.start();
+        Thread keepAliveTimer = cs.TimerThread();
+        keepAliveTimer.start();
         
         try{
-            
-            ResourceUpdateIMP ru = new ResourceUpdateIMP();
+            Thread.sleep( 200 );
+            //ResourceUpdateIMP ru = new ResourceUpdateIMP();
+            ResourceUpdateIMP ru = ResourceUpdateIMP.getInstance();
             Thread fsDaemon = ru.ServerDaemon();
             fsDaemon.start();
 
         }
-        catch(RemoteException e){e.printStackTrace();}
+        catch(InterruptedException|RemoteException e){e.printStackTrace();}
         
     }
 }
+

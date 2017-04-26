@@ -27,13 +27,31 @@ import java.rmi.registry.LocateRegistry;
  */
 public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUpdate
 {
-
+    private static ResourceUpdateIMP m_cachedResourceIMP = null;
+    
     private ArrayList<ArrayList<String>> m_OpenTable;
     private ArrayList<ArrayList<String>> m_CloseTable;
-
+    
+    
+    public static ResourceUpdateIMP getInstance() throws RemoteException
+    {
+        if( m_cachedResourceIMP == null )
+            m_cachedResourceIMP = new ResourceUpdateIMP();
+        return m_cachedResourceIMP;
+    }
+    
+    /*
     public ResourceUpdateIMP() throws RemoteException
     {
+        System.out.println( "!!!!!!!!!!!!!!!!!!" );
         m_OpenTable = new ArrayList<ArrayList<String>>();
+    }
+  */
+    private ResourceUpdateIMP() throws RemoteException
+    {
+        m_OpenTable = new ArrayList<ArrayList<String>>();
+        m_CloseTable = new ArrayList<ArrayList<String>>();
+        
     }
 
     @Override
@@ -62,6 +80,7 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
     @Override
     public ArrayList<ArrayList<String>> getTable() throws RemoteException
     {
+        System.out.println("Actual table: "+m_OpenTable);
         return m_OpenTable;
     }
     
@@ -82,20 +101,7 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         }
         return -1;
     }
-
-    public static void main( String args[] )
-    {
-        try
-        {
-            ResourceUpdateIMP r = new ResourceUpdateIMP();
-            //r.startServerDaemon();
-        }
-        catch ( RemoteException e )
-        {
-            e.printStackTrace();
-        }
-    }
-
+    
     public Thread ServerDaemon()
     {
 
@@ -111,8 +117,8 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
                 try
                 {
                     LocateRegistry.createRegistry( CGlobals.m_iRemoteObjectPort );
-                    ResourceUpdateIMP rsIMPObj = new ResourceUpdateIMP();
-                    Naming.rebind( "//" + CGlobals.m_strLocalHost + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer", rsIMPObj );
+                    //ResourceUpdateIMP rsIMPObj = new ResourceUpdateIMP();
+                    Naming.rebind( "//" + CGlobals.m_strLocalHost + ":" + CGlobals.m_iRemoteObjectPort + "/UpdateServer", m_cachedResourceIMP );
                     System.out.println( "[ResourceUpdate]: UpdateServer ready" );
                 }
                 catch ( RemoteException e )
@@ -129,4 +135,20 @@ public class ResourceUpdateIMP extends UnicastRemoteObject implements ResourceUp
         return thread;
     }
     
+    public void updateTable( ArrayList<String> in_aAliveNodes )
+    {
+        ArrayList<ArrayList<String>> tmpList = new ArrayList<>();
+        for( ArrayList<String> element : m_OpenTable )
+        {
+            String owner = element.get( 0 );
+            if( in_aAliveNodes.indexOf( owner ) > -1)
+                tmpList.add(element);
+            else
+                m_CloseTable.add(element);
+        }
+        m_OpenTable.clear();
+        if(tmpList.size()>0)
+            m_OpenTable = new ArrayList(tmpList);
+        System.out.println("[ResourceUpdateIMP]: OpenTable: "+m_OpenTable);
+    }
 }
