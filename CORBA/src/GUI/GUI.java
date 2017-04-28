@@ -25,7 +25,8 @@ public class GUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jFrame1 = new javax.swing.JFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -48,6 +49,8 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.setName("tree"); // NOI18N
         jScrollPane1.setViewportView(jTree1);
 
@@ -55,8 +58,10 @@ public class GUI extends javax.swing.JFrame {
         jButton2.setBorderPainted(false);
         jButton2.setEnabled(false);
         jButton2.setName("refresh"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -65,8 +70,10 @@ public class GUI extends javax.swing.JFrame {
         jButton3.setEnabled(false);
         jButton3.setName("download"); // NOI18N
         jButton3.setPreferredSize(new java.awt.Dimension(75, 32));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -74,8 +81,10 @@ public class GUI extends javax.swing.JFrame {
         jButton4.setText("Settings");
         jButton4.setMinimumSize(new java.awt.Dimension(75, 32));
         jButton4.setName("settings"); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton4ActionPerformed(evt);
             }
         });

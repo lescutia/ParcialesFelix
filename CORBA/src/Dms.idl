@@ -8,11 +8,11 @@ module dms{
     };
 
     interface RemoteServer {
-        void GetFile( in string fileName , in RemoteClient rCRef ); 
+        void GetFile( in string FileName , in RemoteClient rCRef ); 
     };  
 
     interface RemoteLeader {
-        void update( in string owner , in FileList fileList);
+        void update( in string owner , in FileList FileList);
     };
         
 };
